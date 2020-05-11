@@ -3,11 +3,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import currentEmployee from './reducers/currentEmployee'
 import currentSupervisor from './reducers/currentSupervisor'
+import loginForm from './reducers/loginForm'
 
 
 const reducer = combineReducers({
   currentEmployee,
-  currentSupervisor
+  currentSupervisor,
+  loginForm
 })
 
 const store = createStore(reducer, composeWithDevTools(
