@@ -9,7 +9,6 @@ export const login = (credentials, history) => {
 
   // return dispatch => {
   return fetch("http://localhost:3001/api/v1/employees/login", {
-    credentials: "include",
     method: "POST",
     headers: {
       "Content-Type": "application/json"
