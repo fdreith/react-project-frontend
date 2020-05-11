@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
-// import { updateLoginForm } from "../actions/loginForm.js"
-import { connect } from 'react-redux'
 
 
 class SupervisorLogin extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      email: "",
-      password: ""
-    }
-
+  state = {
+    email: "",
+    password: ""
   }
-
+  
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -38,4 +32,4 @@ class SupervisorLogin extends Component {
 
 
 }
-export default connect(null, {})(SupervisorLogin)
+export default SupervisorLogin
