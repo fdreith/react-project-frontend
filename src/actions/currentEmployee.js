@@ -6,30 +6,30 @@ export const setCurrentEmployee = employee => {
 }
 
 export const login = (credentials, history) => {
-  debugger
-  return dispatch => {
-    return fetch("http://localhost:3001/api/v1/employees/login", {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(credentials)
+
+  // return dispatch => {
+  return fetch("http://localhost:3001/api/v1/employees/login", {
+    credentials: "include",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(credentials)
+  })
+    .then(resp => resp.json())
+    .then(response => {
+      if (response.error) {
+        alert(response.error)
+      } else {
+        debugger
+        // dispatch(setCurrentEmployee(response.data))
+        // dispatch(getMyTasks)
+        console.log("signed in!")
+        history.pushState("/")
+      }
     })
-      .then(resp => resp.json())
-      .then(response => {
-        if (response.error) {
-          alert(response.error)
-        } else {
-          dispatch(setCurrentEmployee(response.data))
-          debugger
-          // dispatch(getMyTasks)
-          console.log("signed in!")
-          history.pushState("/")
-        }
-      })
-    // .catch(alert) 
-  }
+  // .catch(alert) 
+  // }
 }
 
 export const getCurrentEmployee = () => {
