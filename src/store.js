@@ -1,15 +1,11 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
-import currentEmployee from './reducers/currentEmployee'
-import currentSupervisor from './reducers/currentSupervisor'
-import loginForm from './reducers/loginForm'
+import currentUser from './reducers/currentUser'
 
 
 const reducer = combineReducers({
-  currentEmployee,
-  currentSupervisor,
-  loginForm
+  currentUser
 })
 
 // const store = createStore(reducer, composeWithDevTools(
