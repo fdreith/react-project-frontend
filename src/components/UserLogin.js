@@ -18,8 +18,10 @@ class UserLogin extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    login(this.state)
+    debugger
+    this.props.login(this.state)
   }
+
 
   render() {
     return (
@@ -35,6 +37,7 @@ class UserLogin extends Component {
 
 }
 export default connect(null, { login })(UserLogin)
+
 
 
 
