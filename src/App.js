@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import EmployeeLogin from "./components/EmployeeLogin.js"
-import SupervisorLogin from "./components/SupervisorLogin.js"
+import UserLogin from "./components/UserLogin.js"
+
 
 class App extends Component {
 
@@ -9,9 +9,8 @@ class App extends Component {
     return (
       <div className="App">
         <h2>Task Assign</h2>
-        <EmployeeLogin />
-        <br></br><br></br>
-        <SupervisorLogin />
+        <UserLogin />
+  
       </div>
     );
   }
