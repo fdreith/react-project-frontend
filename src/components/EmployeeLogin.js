@@ -48,15 +48,16 @@ const EmployeeLogin = props => {
 
   const handleChange = event => {
     const updatedFormData = {
-      ...props.loginFormData,
+      email: props.email,
+      password: props.password,
       [event.target.name]: event.target.value
     }
-    updateLoginForm(updatedFormData)
+    props.updateLoginForm(updatedFormData)
   }
 
   const handleSubmit = event => {
     event.preventDefault()
-    login(props.loginFormData)
+    props.login({ email: props.email, password: props.password })
   }
 
   return (

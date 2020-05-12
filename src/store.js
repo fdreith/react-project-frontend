@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import currentEmployee from './reducers/currentEmployee'
 import currentSupervisor from './reducers/currentSupervisor'
@@ -12,12 +12,15 @@ const reducer = combineReducers({
   loginForm
 })
 
-const store = createStore(reducer, composeWithDevTools(
-  applyMiddleware(thunk),
-  // other store enhancers if any
-));
+// const store = createStore(reducer, composeWithDevTools(
+//   applyMiddleware(thunk),
+//   // other store enhancers if any
+// ));
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSTION_COMPOSE__ || compose
-// const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(
+  applyMiddleware(thunk)
+));
 
 export default store
