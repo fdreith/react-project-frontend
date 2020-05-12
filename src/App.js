@@ -18,7 +18,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.loggedIn)
     return (
       <div className="App">
         <NavBar loggedIn={this.props.loggedIn} />
