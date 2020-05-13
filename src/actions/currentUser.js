@@ -50,7 +50,8 @@ export const signUp = (credentials, history) => {
       credentials: "include",
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Accept": "application/json"
       },
       body: JSON.stringify(userInfo)
     })
@@ -59,7 +60,8 @@ export const signUp = (credentials, history) => {
         if (response.error) {
           alert(response.error)
         } else {
-          dispatch(setCurrentUser(response.data))
+          debugger
+          dispatch(setCurrentUser(response))
           // dispatch(getMyTasks())
           history.push('/')
         }
