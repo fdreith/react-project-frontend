@@ -100,6 +100,7 @@ export const getCurrentUser = () => {
           console.log(response.error)
         } else {
           dispatch(setCurrentUser(response))
+          dispatch(fetchUsers())
           // dispatch(getMyTasks())
         }
       })
