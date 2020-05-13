@@ -15,7 +15,6 @@ export const fetchDepartments = () => {
           console.log(response.error)
         } else {
           dispatch(setDepartments(response))
-          // dispatch(getMyTasks())
         }
       })
       .catch(console.log)

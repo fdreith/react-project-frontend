@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchUsers } from '../actions/users'
 import MyTasks from '../components/MyTasks.js'
 import TaskForm from '../components/MyTasks.js'
 
 
 class Home extends Component {
-
-  componentDidMount() {
-    this.props.fetchUsers()
-  }
 
   render() {
     return (
@@ -32,4 +27,4 @@ const mapStateToProps = state => {
   })
 }
 
-export default connect(mapStateToProps, { fetchUsers })(Home)
+export default connect(mapStateToProps)(Home)
