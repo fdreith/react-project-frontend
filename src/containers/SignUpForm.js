@@ -9,14 +9,24 @@ class SignUpForm extends Component {
     name: "",
     email: "",
     password: "",
-    department_id: "",
-    supervisor: ""
+    department_id: null,
+    supervisor: false
   }
 
   handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    if (event.target.name === "supervisor") {
+      this.setState({
+        supervisor: (event.target.value === 'true')
+      })
+    } else if (event.target.name === "department_id") {
+      this.setState({
+        department_id: parseInt(event.target.value)
+      })
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
   }
 
   handleSubmit = event => {
@@ -28,7 +38,7 @@ class SignUpForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>Sign Up:   </label>
+        <label>New Users Sign Up:   </label>
         <br></br>
         <input placeholder="name" value={this.state.name} name="name" type="text" onChange={this.handleChange} /><br></br>
         <input placeholder="email" value={this.state.email} name="email" type="text" onChange={this.handleChange} /><br></br>
@@ -49,6 +59,7 @@ class SignUpForm extends Component {
         </div>
         <br></br>
         < input type="submit" value="Sign Up" />
+        {console.log(this.state)}
       </form >
     )
   }
