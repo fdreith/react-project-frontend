@@ -5,8 +5,8 @@ import { getCurrentUser } from './actions/currentUser'
 import Home from './containers/Home.js'
 import NavBar from './components/NavBar.js'
 import { fetchDepartments } from './actions/departments'
-import LoginForm from './components/LoginForm.js'
-import SignUpForm from './components/SignUpForm.js'
+import LoginForm from './containers/LoginForm.js'
+import SignUpForm from './containers/SignUpForm.js'
 
 
 
