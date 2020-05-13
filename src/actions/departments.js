@@ -4,11 +4,9 @@ export const fetchDepartments = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
-      },
+      }
     })
-      .then(resp => {
-        return resp.json()
-      })
+      .then(resp => resp.json())
       .then(response => {
         if (response.error) {
           // alert(response.error)
