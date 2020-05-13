@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addTask } from '../actions/tasks'
+import { postTask } from '../actions/tasks'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -21,10 +20,6 @@ class TaskForm extends Component {
       this.setState({
         user_id: parseInt(event.target.value)
       })
-    } else if (event.target.name === "due_date") {
-      this.setState({
-        due_date: parseInt(event.target.value)
-      })
     } else {
       this.setState({
         [event.target.name]: event.target.value
@@ -32,12 +27,20 @@ class TaskForm extends Component {
     }
   }
 
+  handleDateChange = event => {
+    this.setState({
+      due_date: event
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault()
-    this.props.login(this.state)
+    const task = this.state
+    task.due_date = task.due_date.toString()
+    this.props.postTask(task)
     this.setState = ({
       content: "",
-      due_date: "",
+      due_date: new Date(),
       user_id: null,
       owner_id: this.props.currentUser.id
     })
@@ -52,28 +55,30 @@ class TaskForm extends Component {
         <br></br>
         <div className="form-group">
           <label>Select Due Date:</label>
+          <br></br>
           <DatePicker
             selected={this.state.due_date}
-            onChange={this.handleChange}
+            onChange={this.handleDateChange}
             name="due_date"
             dateFormat="MM/dd/yyyy"
           />
         </div>
+        <label htmlFor="user-select">Who is this task assigned to:</label>
         <br></br>
-        <label>Assigned to:</label>
-        <div>
-          {this.props.users.map(user => <div key={user.id}><> <input id={user.id} key={user.id} type="radio" name="user_id" value={user.id} onChange={this.handleChange} /> <label htmlFor={user.id}>{user.name}</label></></div>)}
-        </div>
+        <select name="user_id" id="user-select" onChange={this.handleChange}>
+          <option value="">Choose a user</option>
+          {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
+        </select>
+        <br></br>
+        <br></br>
         <input type="submit" value="Add Task" />
         {console.log(this.state)}
-        {console.log(this.props)}
       </form>
     )
   }
-
 }
 
-export default connect(null, { addTask })(TaskForm)
+export default connect(null, { postTask })(TaskForm)
 
 
 
