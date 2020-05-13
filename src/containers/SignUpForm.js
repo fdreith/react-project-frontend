@@ -28,10 +28,17 @@ class SignUpForm extends Component {
       })
     }
   }
-
+  
   handleSubmit = event => {
     event.preventDefault()
     this.props.signUp(this.state)
+    this.setState = ({
+      name: "",
+      email: "",
+      password: "",
+      department_id: null,
+      supervisor: false
+    })
   }
 
 
