@@ -25,7 +25,6 @@ class LoginForm extends Component {
     })
   }
 
-
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -37,9 +36,8 @@ class LoginForm extends Component {
       </form>
     )
   }
-
-
 }
+
 export default connect(null, { login })(LoginForm)
 
 
