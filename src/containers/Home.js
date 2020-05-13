@@ -1,23 +1,21 @@
-import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
+import React from 'react'
 import { connect } from 'react-redux';
 import MyTasks from '../components/MyTasks.js'
-import TaskForm from '../components/MyTasks.js'
+import TaskForm from './TaskForm.js'
 
 
-class Home extends Component {
+const Home = props => {
 
-  render() {
-    return (
-      <div>
-        <h4>{this.props.currentUser.name}'s Tasks:</h4>
-        <>
-          <MyTasks currentUser={this.props.currentUser} />
-          <TaskForm />
-        </>
-      </div>
-    )
-  }
+  return (
+    <div>
+      {console.log(props)}
+      <h4>{props.currentUser.name}'s Tasks:</h4>
+      <>
+        <MyTasks currentUser={props.currentUser} />
+        <TaskForm users={props.users} currentUser={props.currentUser} />
+      </>
+    </div>
+  )
 }
 
 const mapStateToProps = state => {
