@@ -8,7 +8,6 @@ const NavBar = props => {
     <div className="NavBar">
       <h2 className="center">Task Assign</h2>
       {props.loggedIn ? < Logout /> : null}
-
     </div>
   )
 
