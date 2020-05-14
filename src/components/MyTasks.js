@@ -3,17 +3,15 @@ import Task from './Task.js'
 import { connect } from 'react-redux';
 
 const MyTasks = props => {
-
   return (
     <div>
       <div>
-        <h3>My Tasks:</h3>
-        {props.myTasks.map(task => <Task task={task} />)}
+        {props.myTasks.map(task => <Task key={task.id} task={task} />)}
       </div>
 
       <div>
-        <h3>My Assigned Tasks:</h3>
-        {props.assignedTasks.map(task => <Task task={task} />)}
+        <h4>My Assigned Tasks:</h4>
+        {props.assignedTasks.map(task => <Task key={task.id} task={task} />)}
       </div>
 
     </div>
@@ -23,7 +21,7 @@ const MyTasks = props => {
 
 const mapStateToProps = state => {
   return ({
-    tasks: state.tasks.myTasks,
+    myTasks: state.tasks.myTasks,
     assignedTasks: state.tasks.assignedTasks
   })
 }
