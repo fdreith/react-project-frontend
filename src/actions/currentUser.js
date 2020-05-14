@@ -1,4 +1,4 @@
-// import { fetchTasks } from "./tasks.js"
+import { setTasks } from "./tasks.js"
 
 export const setCurrentUser = user => {
   return {
@@ -95,8 +95,9 @@ export const getCurrentUser = () => {
           // alert(response.error)
           console.log(response.error)
         } else {
+          debugger
           dispatch(setCurrentUser(response.data))
-
+          dispatch(setTasks(response.included))
         }
       })
       .catch(console.log)
