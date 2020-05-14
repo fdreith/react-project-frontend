@@ -9,9 +9,6 @@ import { fetchDepartments } from './actions/departments'
 import LoginForm from './containers/LoginForm.js'
 import SignUpForm from './containers/SignUpForm.js'
 
-
-
-
 class App extends Component {
 
   componentDidMount() {
