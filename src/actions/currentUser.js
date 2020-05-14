@@ -95,7 +95,6 @@ export const getCurrentUser = () => {
           // alert(response.error)
           console.log(response.error)
         } else {
-          debugger
           dispatch(setCurrentUser(response.data))
 
         }
