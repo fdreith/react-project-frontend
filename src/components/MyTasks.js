@@ -1,18 +1,32 @@
 import React from 'react'
-// import Task from './Task.js'
-
-
+import Task from './Task.js'
+import { connect } from 'react-redux';
 
 const MyTasks = props => {
 
-
   return (
     <div>
-      {/* <Task task={props.tasks.map(task => task)} /> */}
+      <div>
+        <h3>My Tasks:</h3>
+        {props.myTasks.map(task => <Task task={task} />)}
+      </div>
+
+      <div>
+        <h3>My Assigned Tasks:</h3>
+        {props.assignedTasks.map(task => <Task task={task} />)}
+      </div>
 
     </div>
   )
 
 }
 
-export default MyTasks
+const mapStateToProps = state => {
+  debugger
+  return ({
+    tasks: state.tasks.myTasks,
+    assignedTasks: state.tasks.assignedTasks
+  })
+}
+
+export default connect(mapStateToProps)(MyTasks)
