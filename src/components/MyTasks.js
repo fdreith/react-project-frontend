@@ -22,7 +22,6 @@ const MyTasks = props => {
 }
 
 const mapStateToProps = state => {
-  debugger
   return ({
     tasks: state.tasks.myTasks,
     assignedTasks: state.tasks.assignedTasks
