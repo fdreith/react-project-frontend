@@ -1,22 +1,3 @@
-export const fetchTasks = () => {
-  return dispatch => {
-    return fetch("http://localhost:3001/api/v1/tasks", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
-      .then(resp => resp.json())
-      .then(response => {
-        if (response.error) {
-          alert(response.error)
-        } else {
-          dispatch(setTasks(response.data))
-        }
-      })
-    // .catch(alert) 
-  }
-}
 
 export const setTasks = tasks => {
   return {
@@ -47,6 +28,7 @@ export const postTask = task => {
     // .catch(alert) 
   }
 }
+
 
 export const addTask = task => {
   return {
