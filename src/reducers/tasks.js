@@ -1,5 +1,7 @@
-export default function manageTasks(state = [], action) {
+export default (state = [], action) => {
   switch (action.type) {
+    case 'SET_TASKS':
+      return action.tasks
     case 'ADD_TASK':
       return [...state, action.task]
     case 'DELETE_TASK':

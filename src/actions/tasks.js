@@ -11,8 +11,7 @@ export const fetchTasks = () => {
         if (response.error) {
           alert(response.error)
         } else {
-          debugger
-          dispatch(setTasks(response))
+          dispatch(setTasks(response.data))
         }
       })
     // .catch(alert) 
@@ -42,7 +41,7 @@ export const postTask = task => {
           alert(response.error)
         } else {
           debugger
-          dispatch(addTask(response))
+          dispatch(addTask(response.data))
         }
       })
     // .catch(alert) 
