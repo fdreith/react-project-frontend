@@ -28,7 +28,7 @@ class SignUpForm extends Component {
       })
     }
   }
-  
+
   handleSubmit = event => {
     event.preventDefault()
     this.props.signUp(this.state)
@@ -66,7 +66,6 @@ class SignUpForm extends Component {
         </div>
         <br></br>
         < input type="submit" value="Sign Up" />
-        {console.log(this.state)}
       </form >
     )
   }

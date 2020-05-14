@@ -72,7 +72,6 @@ class TaskForm extends Component {
         <br></br>
         <br></br>
         <input type="submit" value="Add Task" />
-        {console.log(this.state)}
       </form>
     )
   }
