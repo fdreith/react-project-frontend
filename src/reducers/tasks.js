@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { myTasks: [], assignedTasks: [] }, action) => {
   switch (action.type) {
     case 'SET_TASKS':
       const assignedTasks = action.tasks.filter(task => task.type === "assigned_task")
