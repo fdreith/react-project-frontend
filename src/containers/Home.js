@@ -11,11 +11,12 @@ class Home extends Component {
     this.props.fetchTasks()
   }
 
-  filterTasks = () => {
-    const assignedTasks = this.props.tasks.filter(task => task.relationships.owner.data.id === this.props.currentUser.id)
-    const myTasks = this.props.tasks.filter(task => task.relationships.user.data.id === this.props.currentUser.id)
-    debugger
+  filterMyTasks = () => {
+    return this.props.tasks.filter(task => task.relationships.user.data.id === this.props.currentUser.id)
+  }
 
+  filterAssignedTasks = () => {
+    return this.props.tasks.filter(task => task.relationships.owner.data.id === this.props.currentUser.id).filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
   }
 
   render() {
@@ -24,7 +25,7 @@ class Home extends Component {
         {console.log(this.props)}
         <h4>{this.props.currentUser.attributes.name}'s Tasks:</h4>
         <>
-          <MyTasks currentUser={this.props.currentUser} tasks={this.filterTasks()} />
+          <MyTasks currentUser={this.props.currentUser} myTasks={this.filterMyTasks()} assignedTasks={this.filterAssignedTasks()} />
           <TaskForm users={this.props.users} currentUser={this.props.currentUser} />
         </>
       </div>
