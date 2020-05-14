@@ -1,5 +1,4 @@
-import { fetchUsers } from "./users.js"
-import { fetchTasks } from "./tasks.js"
+// import { fetchTasks } from "./tasks.js"
 
 export const setCurrentUser = user => {
   return {
@@ -30,10 +29,7 @@ export const login = (credentials, history) => {
         if (response.error) {
           alert(response.error)
         } else {
-          // debugger
-          dispatch(setCurrentUser(response))
-          dispatch(fetchUsers())
-          dispatch(fetchTasks())
+          dispatch(setCurrentUser(response.data))
           console.log("signed in!")
           // history.pushState("/")
         }
@@ -62,10 +58,7 @@ export const signUp = (credentials, history) => {
         if (response.error) {
           alert(response.error)
         } else {
-          debugger
-          dispatch(setCurrentUser(response))
-          dispatch(fetchUsers())
-          dispatch(fetchTasks())
+          dispatch(setCurrentUser(response.data))
           // history.push('/')
         }
       })
@@ -102,9 +95,9 @@ export const getCurrentUser = () => {
           // alert(response.error)
           console.log(response.error)
         } else {
-          dispatch(setCurrentUser(response))
-          dispatch(fetchUsers())
-          dispatch(fetchTasks())
+          debugger
+          dispatch(setCurrentUser(response.data))
+
         }
       })
       .catch(console.log)

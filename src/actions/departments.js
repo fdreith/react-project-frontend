@@ -1,3 +1,5 @@
+import { setUsers } from './users'
+
 export const fetchDepartments = () => {
   return dispatch => {
     return fetch("http://localhost:3001/api/v1/departments", {
@@ -12,7 +14,8 @@ export const fetchDepartments = () => {
           // alert(response.error)
           console.log(response.error)
         } else {
-          dispatch(setDepartments(response))
+          dispatch(setDepartments(response.data))
+          dispatch(setUsers(response.data))
         }
       })
       .catch(console.log)
