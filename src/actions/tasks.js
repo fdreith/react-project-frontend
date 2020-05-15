@@ -21,7 +21,6 @@ export const postTask = task => {
         if (response.error) {
           alert(response.error)
         } else {
-          debugger
           dispatch(addTask(response.data))
         }
       })
@@ -33,6 +32,13 @@ export const postTask = task => {
 export const addTask = task => {
   return {
     type: "ADD_TASK",
+    task
+  }
+}
+
+export const deleteTask = task => {
+  return {
+    type: "DELETE_TASK",
     task
   }
 }
