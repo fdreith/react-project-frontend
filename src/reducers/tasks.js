@@ -9,10 +9,11 @@ export default (state = {
     attributes: { id: "", content: "", due_date: "", completed: "", comments: [] }, user: "", owner: ""
   }]
 }, action) => {
+
   switch (action.type) {
     case 'SET_TASKS':
-      const assignedTasks = action.tasks.filter(task => task.type === "assigned_task").filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
-      const myTasks = action.tasks.filter(task => task.type === "task")
+      const assignedTasks = convertDates(action.tasks.filter(task => task.type === "assigned_task").filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id))
+      const myTasks = convertDates(action.tasks.filter(task => task.type === "task"))
       return { myTasks, assignedTasks }
     case 'ADD_TASK':
       debugger
@@ -26,4 +27,8 @@ export default (state = {
     default:
       return state
   }
+}
+
+const convertDates = (tasks) => {
+  tasks.map(task => task.attributes.due_date = new Date(task.attributes.due_date))
 }
