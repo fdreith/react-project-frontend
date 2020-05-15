@@ -10,7 +10,7 @@ const NavBar = props => {
       <h2 className="center">Task Assign</h2>
       {props.loggedIn ?
         <>
-          <NavLink to="/tasks"> My Tasks </NavLink>
+          <NavLink to="/"> My Tasks </NavLink>
           <NavLink to="/tasks/assigned"> Assigned Tasks </NavLink>
           <NavLink to="/tasks/completed"> Completed Tasks </NavLink>
           < Logout />
