@@ -51,7 +51,7 @@ class TaskForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>New Task:   </label>
         <br></br>
-        <input placeholder="task" value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
+        <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
         <br></br>
         <div className="form-group">
           <label>Select Due Date:</label>
@@ -77,7 +77,14 @@ class TaskForm extends Component {
   }
 }
 
-export default connect(null, { postTask })(TaskForm)
+const mapStateToProps = state => {
+  return ({
+    currentUser: state.currentUser,
+    users: state.users
+  })
+}
+
+export default connect(mapStateToProps, { postTask })(TaskForm)
 
 
 
