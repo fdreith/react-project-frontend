@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import TaskShow from './TaskShow'
-// import Accordion from 'react-bootstrap/Accordion'
-// import Card from 'react-bootstrap/Card'
-// import Comment from './Comment.js'
-// import CommentForm from './CommentForm.js'
-
+import TaskInfo from './TaskInfo'
+import { Link } from 'react-router-dom'
 
 class Task extends Component {
   constructor(props) {
@@ -13,7 +9,6 @@ class Task extends Component {
       showComponent: false
     }
   }
-
 
   handleClick = event => {
     this.state.showComponent === false ?
@@ -24,8 +19,6 @@ class Task extends Component {
       this.setState({
         showComponent: false
       })
-
-
   }
 
   render() {
@@ -34,15 +27,14 @@ class Task extends Component {
         <li onClick={this.handleClick}>
           {this.props.task.attributes.content} - {this.props.task.attributes.due_date}
           {/* {this.props.task.attributes.content || "You have no tasks"} */}
+          <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit </Link>
         </li>
         {this.state.showComponent ?
-          <TaskShow task={this.props.task} /> : null
+          <TaskInfo task={this.props.task} /> : null
         }
       </div>
     )
   }
-
-
 }
 
 export default Task
