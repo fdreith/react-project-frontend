@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import MyTasks from '../components/MyTasks.js'
 import TaskForm from './TaskForm.js'
+import AssignedTasks from '../components/AssignedTasks.js'
+import { Switch, Route } from 'react-router-dom'
 
 
 class TasksContainer extends Component {
@@ -9,13 +11,14 @@ class TasksContainer extends Component {
   render() {
     return (
       <div className="tasks-container">
-        <MyTasks
-          myTasks={this.props.myTasks} assignedTasks={this.props.assignedTasks} currentUser={this.props.currentUser}
-        />
+        <Switch>
+          <Route path="/tasks/assigned" component={AssignedTasks} />
+          <Route exact path="/tasks" component={MyTasks} />
+          <Route path="/tasks/completed" component={TaskForm} />
+        </Switch>
         <hr />
-        <TaskForm
-          users={this.props.users} currentUser={this.props.currentUser}
-        />
+        <TaskForm />
+
       </div >
     )
   }
