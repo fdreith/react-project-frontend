@@ -11,7 +11,7 @@ class TaskForm extends Component {
   state = {
     content: "",
     due_date: new Date(),
-    user_id: null,
+    user_id: this.props.currentUser.id,
     owner_id: this.props.currentUser.id
   }
 
