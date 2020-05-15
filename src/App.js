@@ -3,11 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { connect } from 'react-redux';
 import { getCurrentUser } from './actions/currentUser'
-import TasksContainer from './containers/TasksContainer.js'
+import TasksContainer from './components/TasksContainer.js'
 import NavBar from './components/NavBar.js'
 import { fetchDepartments } from './actions/departments'
-import LoginForm from './containers/LoginForm.js'
-import SignUpForm from './containers/SignUpForm.js'
+import LoginForm from './components/LoginForm.js'
+import SignUpForm from './components/SignUpForm.js'
 import Container from 'react-bootstrap/Container'
 
 
