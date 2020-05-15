@@ -47,7 +47,7 @@ class EditTask extends Component {
   }
 
   render() {
-    // debugger
+    debugger
     return (
       <form onSubmit={this.handleSubmit}>
         <label>New Task:   </label>
