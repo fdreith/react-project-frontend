@@ -1,26 +1,26 @@
 import React from 'react'
 import TaskShow from './TaskShow'
+import { connect } from 'react-redux'
 
 
-const Task = (props) => {
+const Comment = (props) => {
 
-  let taskInfo = ""
-  const handleClick = event => {
-    return taskInfo = <TaskShow task={props.task} />
+  const findUser = userId => {
+    return props.users.find(user => user.id === userId)
   }
-
-
   return (
     <div>
-      <li onClick={handleClick} name={props.task}>
-        {props.task.attributes.content || "You have no tasks"}
-        {taskInfo}
-      </li>
-
+      <p>
+        {findUser(props.comment.user_id).name}: {props.comment.content} at {props.comment.created_at}
+      </p>
+      {console.log(props)}
     </div>
   )
-
-
+}
+const mapStateToProps = state => {
+  return ({
+    users: state.users
+  })
 }
 
-export default Task
+export default connect(mapStateToProps)(Comment)
