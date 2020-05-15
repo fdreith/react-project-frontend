@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskShow from './TaskShow'
+import TaskShow from './TaskInfo'
 import { connect } from 'react-redux'
 
 
