@@ -5,6 +5,12 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom'
 import store from './store'
+import { Switch, Route } from 'react-router-dom'
+import TaskForm from './containers/TaskForm'
+import MyTasks from './components/MyTasks'
+import AssignedTasks from './components/AssignedTasks'
+import TasksContainer from './containers/TasksContainer'
+
 
 
 
