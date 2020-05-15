@@ -17,7 +17,9 @@ export default (state = {
     case 'ADD_TASK':
       debugger
       if (action.task.relationships.user.data.id === action.task.relationships.owner.data.id) {
-        return { ...state, myTasks: [...action.task] }
+        return { ...state.myTasks, ...action.task }
+      } else {
+        return { ...state.assignedTasks, ...action.task }
       }
     case 'DELETE_TASK':
       return state.filter(task => task.id !== action.id)
