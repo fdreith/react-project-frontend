@@ -8,8 +8,6 @@ import NavBar from './components/NavBar.js'
 import { fetchDepartments } from './actions/departments'
 import LoginForm from './components/LoginForm.js'
 import SignUpForm from './components/SignUpForm.js'
-import Container from 'react-bootstrap/Container'
-
 
 class App extends Component {
 
