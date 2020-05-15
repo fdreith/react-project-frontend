@@ -27,7 +27,7 @@ class Task extends Component {
         <li onClick={this.handleClick}>
           {this.props.task.attributes.content} - {this.props.task.attributes.due_date}
           {/* {this.props.task.attributes.content || "You have no tasks"} */}
-          <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit </Link>
+          
         </li>
         {this.state.showComponent ?
           <TaskInfo task={this.props.task} /> : null
