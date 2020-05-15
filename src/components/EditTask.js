@@ -9,9 +9,9 @@ import "react-datepicker/dist/react-datepicker.css";
 class EditTask extends Component {
 
   state = {
-    content: "",
-    due_date: new Date(),
-    user_id: this.props.currentUser.id,
+    content: this.props.task.attributes.content,
+    due_date: this.props.task.attributes.due_date,
+    user_id: this.props.task.attributes.user.id,
     owner_id: this.props.currentUser.id
   }
 
@@ -38,19 +38,13 @@ class EditTask extends Component {
     const task = this.state
     task.due_date = task.due_date.toString()
     this.props.postTask(task)
-    this.setState = ({
-      content: "",
-      due_date: new Date(),
-      user_id: null,
-      owner_id: this.props.currentUser.id
-    })
   }
 
   render() {
     debugger
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>New Task:   </label>
+        <label>Edit Task:   </label>
         <br></br>
         <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
         <br></br>
