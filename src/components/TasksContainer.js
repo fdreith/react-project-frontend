@@ -14,13 +14,11 @@ class TasksContainer extends Component {
       <div className="tasks-container">
         <Switch>
           <Route path="/tasks/assigned" component={AssignedTasks} />
-          <Route exact path="/tasks" component={MyTasks} />
+          <Route exact path="/" component={MyTasks} />
           <Route path="/tasks/completed" component={TaskForm} />
           <Route path="/tasks/:id/edit" render={(routerProps) => {
-            const task = tasks.find(task => {
-              debugger
-              task.id === parseInt(routerProps.match.params.id)
-            })
+            const tasks = [this.props.myTasks, this.props.assignedTasks].flat()
+            const task = tasks.find(task => task.attributes.id === parseInt(routerProps.match.params.id))
             return <EditTask {...routerProps} task={task} />
           }} />}
         </Switch>
