@@ -38,7 +38,7 @@ class TaskForm extends Component {
     const task = this.state
     task.due_date = task.due_date.toString()
     this.props.postTask(task)
-    this.setState = ({
+    this.setState({
       content: "",
       due_date: new Date(),
       user_id: null,
