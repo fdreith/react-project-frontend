@@ -30,8 +30,6 @@ export const login = (credentials, history) => {
           alert(response.error)
         } else {
           dispatch(setCurrentUser(response.data))
-          console.log("signed in!")
-          history.push('/')
         }
       })
     // .catch(alert) 
