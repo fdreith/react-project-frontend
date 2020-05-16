@@ -6,21 +6,36 @@ import AssignedTasks from './AssignedTasks.js'
 import EditTask from './EditTask.js'
 import { Switch, Route } from 'react-router-dom'
 
-
 class TasksContainer extends Component {
 
   render() {
     return (
       <div className="tasks-container">
+        {console.log("myTasks", this.props.myTasks)}
+        {console.log("assignedTasks", this.props.assignedTasks)}
+
         <Switch>
-          <Route path="/tasks/assigned" component={AssignedTasks} />
-          <Route exact path="/" component={MyTasks} />
-          <Route path="/tasks/completed" component={TaskForm} />
-          <Route path="/tasks/:id/edit" render={(routerProps) => {
-            const tasks = [this.props.myTasks, this.props.assignedTasks].flat()
-            const task = tasks.find(task => task.attributes.id === parseInt(routerProps.match.params.id))
-            return <EditTask {...routerProps} task={task} />
-          }} />}
+          <Route
+            path="/tasks/assigned"
+            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.props.assignedTasks} />}
+          />
+          <Route
+            exact path="/"
+            render={(routerProps) => <MyTasks {...routerProps} myTasks={this.props.myTasks} currentUser={this.props.currentUser} />}
+          />
+          <Route
+            path="/tasks/completed"
+            component={TaskForm}
+          />
+          <Route
+            path="/tasks/:id/edit"
+            render={(routerProps) => {
+              const tasks = [this.props.myTasks, this.props.assignedTasks].flat()
+              const task = tasks.find(task => task.attributes.id === parseInt(routerProps.match.params.id))
+              return <EditTask {...routerProps} task={task}
+              />
+            }}
+          />}
         </Switch>
         <hr />
         <TaskForm />
@@ -30,13 +45,27 @@ class TasksContainer extends Component {
   }
 }
 
+const sortByDate = (tasks) => {
+  return tasks.sort(function (a, b) {
+    const dueDateA = a.attributes.due_date
+    const dueDateB = b.attributes.due_date
+    if (dueDateA < dueDateB) {
+      return -1
+    }
+    if (dueDateA > dueDateB) {
+      return 1
+    }
+    return 0
+  })
+}
+
 const mapStateToProps = state => {
   return ({
     currentUser: state.currentUser,
     users: state.users,
     tasks: state.tasks,
-    myTasks: state.tasks.myTasks,
-    assignedTasks: state.tasks.assignedTasks
+    myTasks: sortByDate(state.tasks.myTasks),
+    assignedTasks: sortByDate(state.tasks.assignedTasks)
 
   })
 }

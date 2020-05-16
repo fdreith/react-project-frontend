@@ -1,8 +1,5 @@
 import React from 'react'
 import Task from './Task.js'
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-
 
 const MyTasks = props => {
 
@@ -16,12 +13,5 @@ const MyTasks = props => {
     </div>
   )
 }
-const mapStateToProps = state => {
-  return ({
-    currentUser: state.currentUser,
-    myTasks: state.tasks.myTasks
-  })
-}
 
-
-export default connect(mapStateToProps)(MyTasks)
+export default MyTasks

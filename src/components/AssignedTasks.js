@@ -1,7 +1,5 @@
 import React from 'react'
 import Task from './Task.js'
-import { connect } from 'react-redux';
-
 
 const AssignedTasks = props => {
 
@@ -9,16 +7,11 @@ const AssignedTasks = props => {
     <div className="assignedTasks">
       <h5>My Assigned Tasks:</h5>
       <ul>
-        {props.assignedTasks.map(task => <Task key={task.id} task={task} />)}
+        {props.assignedTasks && props.assignedTasks.map(task => <Task key={task.id} task={task} />)}
       </ul>
     </div>
   )
 }
-const mapStateToProps = state => {
-  return ({
-    assignedTasks: state.tasks.assignedTasks
-  })
-}
 
+export default AssignedTasks
 
-export default connect(mapStateToProps)(AssignedTasks)
