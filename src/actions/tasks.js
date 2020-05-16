@@ -70,7 +70,29 @@ export const updateTaskStore = task => {
 
 
 
-export const deleteTask = taskId => {
+export const deleteTask = (taskId, history) => {
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/tasks/${taskId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(response => {
+        debugger
+        if (response.error) {
+          alert(response.error)
+        } else {
+          history.push('/')
+          dispatch(deleteTaskStore(response.data))
+        }
+      })
+    // .catch(alert) 
+  }
+}
+
+export const deleteTaskStore = taskId => {
   return {
     type: "DELETE_TASK",
     taskId
