@@ -11,8 +11,8 @@ export default (state = {
   switch (action.type) {
     case 'SET_TASKS':
       const tasks = convertDates(action.tasks)
-      const assignedTasks = tasks.filter(task => task.type === "assigned_task").filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
-      const myTasks = tasks.filter(task => task.type === "task")
+      const assignedTasks = tasks.filter(task => task.type === "assigned_task").filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id).sort()
+      const myTasks = tasks.filter(task => task.type === "task").sort()
       return { myTasks, assignedTasks }
     case 'ADD_TASK':
       if (isMyTasks(action)) {
