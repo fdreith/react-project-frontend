@@ -46,7 +46,7 @@ export default (state = {
         const newMyTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
         return { ...state, myTasks: newMyTasks }
       } else {
-        const newAssignedTasks = state.assignedTasks.filter(task => task.id !== action.taskId)
+        const newAssignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
         return { ...state, assignedTasks: newAssignedTasks }
       }
     default:
