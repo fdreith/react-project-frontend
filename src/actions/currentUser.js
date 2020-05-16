@@ -31,7 +31,7 @@ export const login = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(response.data))
           console.log("signed in!")
-          // history.pushState("/")
+          history.push('/')
         }
       })
     // .catch(alert) 
@@ -59,7 +59,7 @@ export const signUp = (credentials, history) => {
           alert(response.error)
         } else {
           dispatch(setCurrentUser(response.data))
-          // history.push('/')
+          history.push('/')
         }
       })
       .catch(console.log)
