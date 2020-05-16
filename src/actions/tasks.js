@@ -37,7 +37,7 @@ export const addTask = task => {
   }
 }
 
-export const updateTask = (task, id) => {
+export const updateTask = (task, id, history) => {
   debugger
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${id}`, {
@@ -53,7 +53,7 @@ export const updateTask = (task, id) => {
         if (response.error) {
           alert(response.error)
         } else {
-          debugger
+          history.push('/')
           dispatch(updateTaskStore(response.data))
         }
         return response.data
