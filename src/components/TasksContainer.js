@@ -11,9 +11,6 @@ class TasksContainer extends Component {
   render() {
     return (
       <div className="tasks-container">
-        {console.log("myTasks", this.props.myTasks)}
-        {console.log("assignedTasks", this.props.assignedTasks)}
-
         <Switch>
           <Route
             path="/tasks/assigned"
