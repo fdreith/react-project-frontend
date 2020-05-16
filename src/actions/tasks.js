@@ -7,6 +7,7 @@ export const setTasks = tasks => {
 }
 
 export const postTask = task => {
+  debugger
   return dispatch => {
     return fetch("http://localhost:3001/api/v1/tasks", {
       method: "POST",
@@ -36,11 +37,11 @@ export const addTask = task => {
   }
 }
 
-export const updateTask = (task) => {
+export const updateTask = (task, id) => {
   debugger
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/tasks/${task.id}`, {
-      method: "POST",
+    return fetch(`http://localhost:3001/api/v1/tasks/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
@@ -52,6 +53,7 @@ export const updateTask = (task) => {
         if (response.error) {
           alert(response.error)
         } else {
+          debugger
           dispatch(updateTaskStore(response.data))
         }
         return response.data

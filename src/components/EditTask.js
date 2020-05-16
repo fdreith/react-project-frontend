@@ -4,16 +4,24 @@ import { updateTask } from '../actions/tasks'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+const initialState = {
+  content: "",
+  due_date: new Date(),
+  user_id: 0,
+  owner_id: 0
 
+}
 
 class EditTask extends Component {
 
-  state = {
-    content: this.props.task.attributes.content,
-    due_date: this.props.task.attributes.due_date,
-    user_id: this.props.task.attributes.user.id,
-    owner_id: this.props.currentUser.id
-  }
+  state = this.props.task ?
+    {
+      content: this.props.task.attributes.content,
+      due_date: this.props.task.attributes.due_date,
+      user_id: this.props.task.attributes.user.id,
+      owner_id: this.props.currentUser.id
+    } :
+    initialState
 
   handleChange = event => {
     if (event.target.name === "user_id") {
@@ -37,11 +45,11 @@ class EditTask extends Component {
     event.preventDefault()
     const task = this.state
     task.due_date = task.due_date.toString()
-    this.props.updateTask(task)
+    task.owner_id = parseInt(task.owner_id)
+    this.props.updateTask(task, this.props.task.attributes.id)
   }
 
   render() {
-    debugger
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Edit Task:   </label>

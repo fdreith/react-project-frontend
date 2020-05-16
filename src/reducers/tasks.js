@@ -22,7 +22,7 @@ export default (state = {
       }
     case 'UPDATE_TASK':
       debugger
-      if (myTasks(action)) {
+      if (isMyTasks(action)) {
         return state.myTasks.map(task => {
           if (task.id === action.task.id) {
             return action.task
@@ -54,6 +54,6 @@ const convertDates = (tasks) => {
   })
 }
 
-const myTasks = (action) => {
+const isMyTasks = (action) => {
   return action.task.relationships.user.data.id === action.task.relationships.owner.data.id
 }
