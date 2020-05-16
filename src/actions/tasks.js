@@ -7,7 +7,6 @@ export const setTasks = tasks => {
 }
 
 export const postTask = task => {
-  debugger
   return dispatch => {
     return fetch("http://localhost:3001/api/v1/tasks", {
       method: "POST",
@@ -38,7 +37,6 @@ export const addTask = task => {
 }
 
 export const updateTask = (task, id, history) => {
-  debugger
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${id}`, {
       method: "PATCH",
@@ -80,12 +78,11 @@ export const deleteTask = (taskId, history) => {
     })
       .then(resp => resp.json())
       .then(response => {
-        debugger
         if (response.error) {
           alert(response.error)
         } else {
           history.push('/')
-          dispatch(deleteTaskStore(response.data))
+          dispatch(deleteTaskStore(taskId))
         }
       })
     // .catch(alert) 
