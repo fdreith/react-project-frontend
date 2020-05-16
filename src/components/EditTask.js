@@ -43,7 +43,6 @@ class EditTask extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    debugger
     const task = this.state
     task.due_date = task.due_date.toString()
     task.owner_id = parseInt(task.owner_id)

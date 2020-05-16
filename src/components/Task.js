@@ -37,7 +37,8 @@ class Task extends Component {
   }
 }
 
-const displayDate = (date) => {
+const displayDate = (dateString) => {
+  const date = new Date(dateString)
   const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
   const weekday = days[date.getDay()]
