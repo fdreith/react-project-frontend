@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { postTask } from '../actions/tasks'
+import { updateTask } from '../actions/tasks'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -37,7 +37,7 @@ class EditTask extends Component {
     event.preventDefault()
     const task = this.state
     task.due_date = task.due_date.toString()
-    this.props.postTask(task)
+    this.props.updateTask(task)
   }
 
   render() {
@@ -66,7 +66,7 @@ class EditTask extends Component {
         </select>
         <br></br>
         <br></br>
-        <input type="submit" value="Add Task" />
+        <input type="submit" value="Update Task" />
       </form>
     )
   }
@@ -79,4 +79,4 @@ const mapStateToProps = state => {
   })
 }
 
-export default connect(mapStateToProps, { postTask })(EditTask)
+export default connect(mapStateToProps, { updateTask })(EditTask)
