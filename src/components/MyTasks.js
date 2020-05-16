@@ -8,7 +8,7 @@ const MyTasks = props => {
       <h5>{props.currentUser.attributes.name}'s
   Tasks:</h5>
       <ul>
-        {props.myTasks && props.myTasks.map(task => <Task key={task.id} task={task} />)}
+        {props.myTasks && props.myTasks.map(task => <Task key={task.id} task={task} history={props.history} />)}
       </ul>
     </div>
   )
