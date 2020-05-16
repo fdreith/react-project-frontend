@@ -8,6 +8,7 @@ import NavBar from './components/NavBar.js'
 import { fetchDepartments } from './actions/departments'
 import LoginForm from './components/LoginForm.js'
 import SignUpForm from './components/SignUpForm.js'
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
 
@@ -26,7 +27,7 @@ class App extends Component {
           <><LoginForm /><br></br><br></br>
             <SignUpForm departments={this.props.departments} />
           </>}
- 
+
       </div>
     );
   }
@@ -39,6 +40,6 @@ const mapStateToProps = state => {
   })
 }
 
-export default connect(mapStateToProps, { getCurrentUser, fetchDepartments })(App);
+export default withRouter(connect(mapStateToProps, { getCurrentUser, fetchDepartments })(App))
 
 
