@@ -1,19 +1,17 @@
 export default (state = {
-  myTasks: [
-    // {
-    // id: "",
-    // type: "",
-    // attributes: { id: "", content: "", due_date: "", completed: "", comments: [] }, user: "", owner: ""
-    // }
-  ], assignedTasks: []
+  myTasks: [], assignedTasks: [], completedTasks: []
 }, action) => {
 
   switch (action.type) {
     case 'SET_TASKS':
       const tasks = convertDates(action.tasks)
-      const assignedTasks = tasks.filter(task => task.type === "assigned_task").filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id).sort()
-      const myTasks = tasks.filter(task => task.type === "task").sort()
-      return { myTasks, assignedTasks }
+      const assignedTasks = tasks.filter(task => task.type === "assigned_task")
+        .filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
+        .filter(task => task.attributes.completed === false)
+      const myTasks = tasks.filter(task => task.type === "task")
+        .filter(task => task.attributes.completed === false)
+      const completedTasks = myTasks.filter(task => task.attributes.completed === true)
+      return { myTasks, assignedTasks, completedTasks }
     case 'ADD_TASK':
       if (isMyTasks(action)) {
         return { ...state, myTasks: [...state.myTasks, action.task] }
@@ -40,7 +38,15 @@ export default (state = {
         })
         return { ...state, assignedTasks: newAssignedTasksState }
       }
-
+    case 'COMPLETED_TASK':
+      if (isMyTasks(action)) {
+        const myTasks = state.myTasks.filter(task => task.id !== action.task.id)
+        const completedTasks = [...state.completedTasks, action.task]
+        return { ...state, myTasks, completedTasks }
+      } else {
+        const assignedTasks = state.assignedTasks.filter(task => task.id !== action.task.id)
+        return { ...state, assignedTasks }
+      }
     case 'DELETE_TASK':
       if (state.myTasks.find(task => task.attributes.id === action.taskId)) {
         const newMyTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)

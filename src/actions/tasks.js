@@ -28,7 +28,6 @@ export const postTask = task => {
   }
 }
 
-
 export const addTask = task => {
   return {
     type: "ADD_TASK",
@@ -52,13 +51,16 @@ export const updateTask = (task, id, history) => {
           alert(response.error)
         } else {
           history.push('/')
-          dispatch(updateTaskStore(response.data))
+          response.data.attributes.completed === true ?
+            dispatch(completedTask(response.data)) :
+            dispatch(updateTaskStore(response.data))
         }
         return response.data
       })
     // .catch(alert) 
   }
 }
+
 export const updateTaskStore = task => {
   return {
     type: "UPDATE_TASK",
@@ -66,7 +68,12 @@ export const updateTaskStore = task => {
   }
 }
 
-
+export const completedTask = task => {
+  return {
+    type: "COMPLETED_TASK",
+    task
+  }
+}
 
 export const deleteTask = (taskId, history) => {
   return dispatch => {
