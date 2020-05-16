@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateTask } from '../actions/tasks'
+import { updateTask, deleteTask } from '../actions/tasks'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -52,31 +52,34 @@ class EditTask extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Edit Task:   </label>
-        <br></br>
-        <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
-        <br></br>
-        <div className="form-group">
-          <label>Select Due Date:</label>
+      <div className="task-edit">
+        <form onSubmit={this.handleSubmit}>
+          <label>Edit Task:   </label>
           <br></br>
-          <DatePicker
-            selected={this.state.due_date}
-            onChange={this.handleDateChange}
-            name="due_date"
-            dateFormat="MM/dd/yyyy"
-          />
-        </div>
-        <label htmlFor="user-select">Who is this task assigned to:</label>
-        <br></br>
-        <select name="user_id" id="user-select" onChange={this.handleChange}>
-          <option value="">Choose a user</option>
-          {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
-        </select>
-        <br></br>
-        <br></br>
-        <input type="submit" value="Update Task" />
-      </form>
+          <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
+          <br></br>
+          <div className="form-group">
+            <label>Select Due Date:</label>
+            <br></br>
+            <DatePicker
+              selected={this.state.due_date}
+              onChange={this.handleDateChange}
+              name="due_date"
+              dateFormat="MM/dd/yyyy"
+            />
+          </div>
+          <label htmlFor="user-select">Who is this task assigned to:</label>
+          <br></br>
+          <select name="user_id" id="user-select" onChange={this.handleChange}>
+            <option value="">Choose a user</option>
+            {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
+          </select>
+          <br></br>
+          <br></br>
+          <input type="submit" value="Update Task" />
+        </form>
+        <input onClick={() => this.props.deleteTask(this.props.task.attributes.id, this.props.history)} type="button" value="Delete Task" />
+      </div>
     )
   }
 }
@@ -88,4 +91,4 @@ const mapStateToProps = state => {
   })
 }
 
-export default connect(mapStateToProps, { updateTask })(EditTask)
+export default connect(mapStateToProps, { updateTask, deleteTask })(EditTask)

@@ -43,7 +43,13 @@ export default (state = {
 
     case 'DELETE_TASK':
       debugger
-      return state.filter(task => task.id !== action.id)
+      if (state.myTasks.find(task => task.attributes.id === action.taskId)) {
+        const newMyTasks = state.myTasks.filter(task => task.id !== action.taskId)
+        return { ...state, myTasks: newMyTasks }
+      } else {
+        const newAssignedTasks = state.assignedTasks.filter(task => task.id !== action.taskId)
+        return { ...state, assignedTasks: newAssignedTasks }
+      }
     default:
       return state
   }

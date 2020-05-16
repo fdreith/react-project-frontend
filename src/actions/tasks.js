@@ -70,9 +70,9 @@ export const updateTaskStore = task => {
 
 
 
-export const deleteTask = task => {
+export const deleteTask = taskId => {
   return {
     type: "DELETE_TASK",
-    task
+    taskId
   }
 }
