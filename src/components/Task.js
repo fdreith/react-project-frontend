@@ -25,7 +25,7 @@ class Task extends Component {
     return (
       <div>
         <li onClick={this.handleClick}>
-          {this.props.task.attributes.content} - {this.props.task.attributes.due_date.toString()}
+          {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
           {/* {this.props.task.attributes.content || "You have no tasks"} */}
 
         </li>
@@ -35,6 +35,17 @@ class Task extends Component {
       </div>
     )
   }
+}
+
+const displayDate = (date) => {
+  const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat']
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+  const weekday = days[date.getDay()]
+  const month = months[date.getMonth()]
+  const day = date.getDate()
+  const year = date.getFullYear()
+  return `${weekday}, ${month} ${day} ${year}`
+
 }
 
 export default Task
