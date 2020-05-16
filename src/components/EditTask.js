@@ -17,7 +17,7 @@ class EditTask extends Component {
   state = this.props.task ?
     {
       content: this.props.task.attributes.content,
-      due_date: this.props.task.attributes.due_date,
+      due_date: new Date(this.props.task.attributes.due_date),
       user_id: this.props.task.attributes.user.id,
       owner_id: this.props.currentUser.id
     } :
