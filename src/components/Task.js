@@ -6,19 +6,14 @@ class Task extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showComponent: false
+      showComponent: false,
     }
   }
 
   handleClick = event => {
-    this.state.showComponent === false ?
-      this.setState({
-        showComponent: true
-      })
-      :
-      this.setState({
-        showComponent: false
-      })
+    this.setState({
+      showComponent: !this.state.showComponent
+    })
   }
 
   render() {
@@ -29,8 +24,8 @@ class Task extends Component {
           {/* {this.props.task.attributes.content || "You have no tasks"} */}
 
         </li>
-        {this.state.showComponent ?
-          <TaskInfo task={this.props.task} /> : null
+        {this.state.showComponent &&
+          <TaskInfo task={this.props.task} history={this.props.history}/>
         }
       </div>
     )
