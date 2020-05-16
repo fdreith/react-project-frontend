@@ -25,9 +25,9 @@ class Task extends Component {
     return (
       <div>
         <li onClick={this.handleClick}>
-          {this.props.task.attributes.content} - {this.props.task.attributes.due_date}
+          {this.props.task.attributes.content} - {this.props.task.attributes.due_date.toString()}
           {/* {this.props.task.attributes.content || "You have no tasks"} */}
-          
+
         </li>
         {this.state.showComponent ?
           <TaskInfo task={this.props.task} /> : null
