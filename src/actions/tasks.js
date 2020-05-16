@@ -36,6 +36,38 @@ export const addTask = task => {
   }
 }
 
+export const updateTask = (task) => {
+  debugger
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/tasks/${task.id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(task)
+    })
+      .then(resp => resp.json())
+      .then(response => {
+        if (response.error) {
+          alert(response.error)
+        } else {
+          dispatch(updateTaskStore(response.data))
+        }
+        return response.data
+      })
+    // .catch(alert) 
+  }
+}
+export const updateTaskStore = task => {
+  return {
+    type: "UPDATE_TASK",
+    task
+  }
+}
+
+
+
 export const deleteTask = task => {
   return {
     type: "DELETE_TASK",
