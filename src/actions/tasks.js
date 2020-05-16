@@ -72,17 +72,18 @@ export const deleteTask = (taskId, history) => {
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${taskId}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      }
+      // headers: {
+      //   "Content-Type": "application/json"
+      // }
     })
       .then(resp => resp.json())
       .then(response => {
-        if (response.error) {
-          alert(response.error)
-        } else {
+        if (response.message) {
           history.push('/')
+          alert(response.message)
           dispatch(deleteTaskStore(taskId))
+        } else {
+          throw new Error(response.errors)
         }
       })
     // .catch(alert) 
