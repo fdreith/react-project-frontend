@@ -1,3 +1,31 @@
+export const fetchComments = () => {
+  return dispatch => {
+    return fetch("http://localhost:3001/api/v1/comments", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(response => {
+        if (response.error) {
+          // alert(response.error)
+          console.log(response.error)
+        } else {
+          dispatch(setComments(response.data))
+        }
+      })
+      .catch(console.log)
+  }
+}
+
+export const setComments = comments => {
+  return {
+    type: "SET_COMMENTS",
+    comments
+  }
+}
+
 export const postComment = comment => {
   return dispatch => {
     return fetch("http://localhost:3001/api/v1/comments", {
@@ -10,7 +38,6 @@ export const postComment = comment => {
     })
       .then(resp => resp.json())
       .then(response => {
-        debugger
         if (response.error) {
           alert(response.error)
         } else {
@@ -25,5 +52,31 @@ export const addComment = comment => {
   return {
     type: "ADD_COMMENT",
     comment
+  }
+}
+
+export const deleteComment = (commentId, history) => {
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/comments/${commentId}`, {
+      method: "DELETE",
+    })
+      .then(resp => resp.json())
+      .then(response => {
+        if (response.message) {
+          history.push('/')
+          alert(response.message)
+          dispatch(deleteCommentStore(commentId))
+        } else {
+          throw new Error(response.errors)
+        }
+      })
+    // .catch(alert) 
+  }
+}
+
+export const deleteCommentStore = commentId => {
+  return {
+    type: "DELETE_COMMENT",
+    commentId
   }
 }
