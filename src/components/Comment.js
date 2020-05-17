@@ -23,7 +23,6 @@ const displayDateAndTime = (dateString) => {
   const hour = date.getHours()
   const min = date.getMinutes()
   return `${hour}:${min} on ${month}-${date.getDate()}-${date.getFullYear()}`
-
 }
 
 const mapStateToProps = state => {
