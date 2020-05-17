@@ -63,7 +63,6 @@ export const deleteComment = (commentId, history) => {
       .then(resp => resp.json())
       .then(response => {
         if (response.message) {
-          history.push('/')
           alert(response.message)
           dispatch(deleteCommentStore(commentId))
         } else {
