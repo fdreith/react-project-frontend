@@ -77,7 +77,7 @@ class EditTask extends Component {
           <br></br>
           <input type="submit" value="Update Task" />
         </form>
-        <input onClick={() => this.props.deleteTask(this.props.task.attributes.id, this.props.history)} type="button" value="Delete Task" />
+        {this.props.task && <input onClick={() => this.props.deleteTask(this.props.task.attributes.id, this.props.history)} type="button" value="Delete Task" />}
       </div>
     )
   }

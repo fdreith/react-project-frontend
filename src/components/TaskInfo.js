@@ -28,9 +28,11 @@ class TaskInfo extends Component {
           {this.props.completed ||
             <button onClick={this.handleClick}>Completed</button>}
 
-          {this.props.comments.map(comment => comment.attributes.task_id === this.props.task.attributes.id && <Comment key={comment.attributes.id} comment={comment} currentUser={this.props.currentUser}/>)}
-          <CommentForm taskId={this.props.task.attributes.id} currentUser={this.props.currentUser}/>
-          <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit Task </Link>
+          {this.props.comments.map(comment => comment.attributes.task_id === this.props.task.attributes.id && <Comment key={comment.attributes.id} comment={comment} currentUser={this.props.currentUser} />)}
+          <CommentForm taskId={this.props.task.attributes.id} currentUser={this.props.currentUser} />
+          {!this.props.completed &&
+            <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit Task </Link>}
+
         </Card>
       </div>
     )

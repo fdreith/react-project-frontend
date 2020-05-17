@@ -3,17 +3,23 @@ export default (state = {
 }, action) => {
 
   const isMyTask = (action) => {
-    return action.task ?
-      action.task.relationships.user.data.id === action.task.relationships.owner.data.id
-      :
-      state.myTasks.find(task => parseInt(task.id) === action.comment.task_id)
+    if (action.task) {
+      return action.task.relationships.user.data.id === action.task.relationships.owner.data.id
+    } else if (action.taskId) {
+      return state.myTasks.find(task => parseInt(task.id) === action.taskId)
+    } else {
+      return state.myTasks.find(task => parseInt(task.id) === action.comment.task_id)
+    }
   }
 
   const isCompleted = (action) => {
-    return action.task ?
-      action.task.attributes.completed
-      :
-      state.completedTasks.find(task => parseInt(task.id) === action.comment.task_id)
+    if (action.task) {
+      return action.task.attributes.completed
+    } else if (action.taskId) {
+      return state.completedTasks.find(task => parseInt(task.id) === action.taskId)
+    } else {
+      return state.completedTasks.find(task => parseInt(task.id) === action.comment.task_id)
+    }
   }
 
   switch (action.type) {
