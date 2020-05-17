@@ -16,19 +16,39 @@ class Task extends Component {
     })
   }
 
+  renderTask = () => {
+    if (this.props.completed) {
+      return (
+        <div>
+          <li onClick={this.handleClick}>
+            {this.props.task.attributes.content}
+          </li>
+          {this.state.showComponent &&
+            <TaskInfo task={this.props.task} history={this.props.history} completed={this.props.completed} />
+          }
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <li onClick={this.handleClick}>
+            {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
+          </li>
+          {this.state.showComponent &&
+            <TaskInfo task={this.props.task} history={this.props.history} />
+          }
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <div>
-        <li onClick={this.handleClick}>
-          {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
-          {/* {this.props.task.attributes.content || "You have no tasks"} */}
-
-        </li>
-        {this.state.showComponent &&
-          <TaskInfo task={this.props.task} history={this.props.history}/>
-        }
+        {this.renderTask()}
       </div>
     )
+
   }
 }
 

@@ -23,13 +23,13 @@ class TaskInfo extends Component {
   render() {
     return (
       <div>
-        {console.log(this.props.history)}
         <Card>
-          <p>Assigned by: {this.props.task.attributes.owner.name}</p>
-          <button onClick={this.handleClick}>Completed</button>
+          <p>Assigned to: {this.props.task.attributes.user.name} by {this.props.task.attributes.owner.name}</p>
+          {this.props.completed ||
+            <button onClick={this.handleClick}>Completed</button>}
           {this.props.task.attributes.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
-          <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit </Link>
           {/* <CommentForm taskId={this.props.task.attributes.id} /> */}
+          <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit Task </Link>
         </Card>
       </div>
     )
