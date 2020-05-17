@@ -20,24 +20,34 @@ export default (state = {
         return { ...state, assignedTasks: [...state.assignedTasks, action.task] }
       }
     case 'UPDATE_TASK':
-      if (isMyTasks(action)) {
-        const newMyTasksState = state.myTasks.map(task => {
+      if (isCompleted(action)) {
+        const completedTasks = state.completedTasks.map(task => {
           if (task.id === action.task.id) {
             return action.task
           } else {
             return task
           }
         })
-        return { ...state, myTasks: newMyTasksState }
+        return { ...state, completedTasks }
+      }
+      else if (isMyTasks(action)) {
+        const myTasks = state.myTasks.map(task => {
+          if (task.id === action.task.id) {
+            return action.task
+          } else {
+            return task
+          }
+        })
+        return { ...state, myTasks }
       } else {
-        const newAssignedTasksState = state.assignedTasks.map(task => {
+        const assignedTasks = state.assignedTasks.map(task => {
           if (task.id === action.task.id) {
             return action.task
           } else {
             return task
           }
         })
-        return { ...state, assignedTasks: newAssignedTasksState }
+        return { ...state, assignedTasks }
       }
     case 'COMPLETED_TASK':
       if (isMyTasks(action)) {
@@ -49,12 +59,15 @@ export default (state = {
         return { ...state, assignedTasks }
       }
     case 'DELETE_TASK':
-      if (state.myTasks.find(task => task.attributes.id === action.taskId)) {
-        const newMyTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, myTasks: newMyTasks }
+      if (isCompleted(action)) {
+        const completedTasks = state.completedTasks.filter(task => parseInt(task.id) !== action.taskId)
+        return { ...state, completedTasks }
+      } else if (isMyTasks(action)) {
+        const myTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
+        return { ...state, myTasks }
       } else {
-        const newAssignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, assignedTasks: newAssignedTasks }
+        const assignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
+        return { ...state, assignedTasks }
       }
     case 'ADD_COMMENT':
       debugger
@@ -64,13 +77,17 @@ export default (state = {
   }
 }
 
+const isMyTasks = (action) => {
+  return action.task.relationships.user.data.id === action.task.relationships.owner.data.id
+}
+
+const isCompleted = (action) => {
+  return action.task.attributes.completed
+}
+
 const convertDates = (tasks) => {
   return tasks.map(task => {
     task.attributes.due_date = new Date(task.attributes.due_date)
     return task
   })
-}
-
-const isMyTasks = (action) => {
-  return action.task.relationships.user.data.id === action.task.relationships.owner.data.id
 }
