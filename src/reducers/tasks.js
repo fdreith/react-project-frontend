@@ -10,7 +10,8 @@ export default (state = {
         .filter(task => task.attributes.completed === false)
       const myTasks = tasks.filter(task => task.type === "task")
         .filter(task => task.attributes.completed === false)
-      const completedTasks = myTasks.filter(task => task.attributes.completed === true)
+      const completedTasks = tasks.filter(task => task.attributes.completed === true)
+        .filter(task => task.type === "task")
       return { myTasks, assignedTasks, completedTasks }
     case 'ADD_TASK':
       if (isMyTasks(action)) {
