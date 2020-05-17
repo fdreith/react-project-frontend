@@ -56,6 +56,9 @@ export default (state = {
         const newAssignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
         return { ...state, assignedTasks: newAssignedTasks }
       }
+    case 'ADD_COMMENT':
+      debugger
+    // find task by taskId in any of the three state.s -- extract into an outside function and then add the comment..
     default:
       return state
   }

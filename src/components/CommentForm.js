@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { postComment } from '../actions/comments'
+import { postComment } from '../actions/comments'
 import { connect } from 'react-redux'
 
 
@@ -7,7 +7,8 @@ class CommentForm extends Component {
 
   state = {
     content: "",
-    user_id: this.props.currentUser.id
+    task_id: this.props.taskId,
+    user_id: parseInt(this.props.currentUser.id)
   }
 
   handleChange = event => {
@@ -18,9 +19,10 @@ class CommentForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    // this.props.postComment(this.state)
+    this.props.postComment(this.state)
     this.setState = ({
       content: "",
+      task_id: this.props.taskId,
       user_id: this.props.currentUser.id
     })
   }
@@ -28,11 +30,8 @@ class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>Login:   </label>
-        <br></br>
-        <input placeholder="email" value={this.state.email} name="email" type="text" onChange={this.handleChange} />
-        <input placeholder="password" value={this.state.password} name="password" type="text" onChange={this.handleChange} />
-        <input type="submit" value="Log In" />
+        <input placeholder="Comment on task" value={this.state.content} name="content" type="text" onChange={this.handleChange} />
+        <input type="submit" value="Submit" />
       </form>
     )
   }
@@ -43,7 +42,7 @@ const mapStateToProps = state => {
   })
 }
 
-export default connect(mapStateToProps)(CommentForm)
+export default connect(mapStateToProps, { postComment })(CommentForm)
 
 
 

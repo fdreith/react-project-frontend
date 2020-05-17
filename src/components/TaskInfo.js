@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateTask } from '../actions/tasks'
-// import CommentForm from './CommentForm.js'
+import CommentForm from './CommentForm.js'
 
 class TaskInfo extends Component {
 
@@ -28,7 +28,7 @@ class TaskInfo extends Component {
           {this.props.completed ||
             <button onClick={this.handleClick}>Completed</button>}
           {this.props.task.attributes.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
-          {/* <CommentForm taskId={this.props.task.attributes.id} /> */}
+          <CommentForm taskId={this.props.task.attributes.id} />
           <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit Task </Link>
         </Card>
       </div>
