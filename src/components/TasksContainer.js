@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import MyTasks from './MyTasks.js'
 import TaskForm from './TaskForm.js'
 import AssignedTasks from './AssignedTasks.js'
+import CompletedTasks from './CompletedTasks.js'
 import EditTask from './EditTask.js'
 import { Switch, Route } from 'react-router-dom'
 
@@ -22,7 +23,7 @@ class TasksContainer extends Component {
           />
           <Route
             path="/tasks/completed"
-            component={TaskForm}
+            render={(routerProps) => <CompletedTasks {...routerProps} completedTasks={this.props.completedTasks} />}
           />
           <Route
             path="/tasks/:id/edit"
@@ -62,7 +63,8 @@ const mapStateToProps = state => {
     users: state.users,
     tasks: state.tasks,
     myTasks: sortByDate(state.tasks.myTasks),
-    assignedTasks: sortByDate(state.tasks.assignedTasks)
+    assignedTasks: sortByDate(state.tasks.assignedTasks),
+    completedTasks: sortByDate(state.tasks.completedTasks)
 
   })
 }
