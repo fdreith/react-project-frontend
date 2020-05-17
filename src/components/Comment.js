@@ -1,17 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { deleteComment } from '../actions/comments'
 
 
 const Comment = (props) => {
 
-  const findUser = userId => {
-    return props.users.find(user => user.id === userId)
-  }
-
   return (
     <div>
       <p>
-        {findUser(props.comment.user_id).name} at {displayDateAndTime(props.comment.created_at)} : {props.comment.content}
+        {props.comment.attributes.user.name} at {displayDateAndTime(props.comment.attributes.created_at)} : {props.comment.attributes.content}
+        {props.comment.attributes.user.id === parseInt(props.currentUser.attributes.id) && <button onClick={() => props.deleteComment(props.comment.attributes.id)}>X</button>}
       </p>
     </div>
   )
@@ -25,10 +23,4 @@ const displayDateAndTime = (dateString) => {
   return `${hour}:${min} on ${month}-${date.getDate()}-${date.getFullYear()}`
 }
 
-const mapStateToProps = state => {
-  return ({
-    users: state.users
-  })
-}
-
-export default connect(mapStateToProps)(Comment)
+export default connect(null, { deleteComment })(Comment)
