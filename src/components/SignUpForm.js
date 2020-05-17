@@ -44,7 +44,8 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      < form onSubmit={this.handleSubmit} >
+        {console.log(this.props)}
         <label>New Users Sign Up:   </label>
         <br></br>
         <input placeholder="name" value={this.state.name} name="name" type="text" onChange={this.handleChange} /><br></br>
@@ -53,7 +54,7 @@ class SignUpForm extends Component {
         <br></br>
         <div>
           <label>Department:</label>
-          {this.props.departments.map(department => <div key={department.id}><> <input id={department.id} key={department.id} type="radio" name="department_id" value={department.id} onChange={this.handleChange} /> <label htmlFor={department.id}>{department.name}</label></></div>)}
+          {this.props.departments.map(department => <div key={department.attributes.id}><> <input id={department.attributes.id} key={department.attributes.id} type="radio" name="department_id" value={department.attributes.id} onChange={this.handleChange} /> <label htmlFor={department.attributes.id}>{department.attributes.name}</label></></div>)}
         </div>
         <br></br>
         <div>
