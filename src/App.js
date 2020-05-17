@@ -6,6 +6,7 @@ import { getCurrentUser } from './actions/currentUser'
 import TasksContainer from './components/TasksContainer.js'
 import NavBar from './components/NavBar.js'
 import { fetchDepartments } from './actions/departments'
+import { fetchComments } from './actions/comments'
 import LoginForm from './components/LoginForm.js'
 import SignUpForm from './components/SignUpForm.js'
 import { withRouter } from 'react-router-dom';
@@ -15,6 +16,7 @@ class App extends Component {
   componentDidMount() {
     this.props.getCurrentUser()
     this.props.fetchDepartments()
+    this.props.fetchComments()
   }
 
   render() {
@@ -40,6 +42,6 @@ const mapStateToProps = state => {
   })
 }
 
-export default withRouter(connect(mapStateToProps, { getCurrentUser, fetchDepartments })(App))
+export default withRouter(connect(mapStateToProps, { getCurrentUser, fetchDepartments, fetchComments })(App))
 
 
