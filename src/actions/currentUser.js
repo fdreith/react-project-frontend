@@ -32,12 +32,11 @@ export const login = (credentials, history) => {
           dispatch(setCurrentUser(response.data))
         }
       })
-    // .catch(alert) 
+      .catch(alert)
   }
 }
 
 export const signUp = (credentials, history) => {
-  debugger
   return dispatch => {
     const userInfo = {
       user: credentials
@@ -60,7 +59,7 @@ export const signUp = (credentials, history) => {
           history.push('/')
         }
       })
-      .catch(console.log)
+      .catch(alert)
   }
 }
 
@@ -68,7 +67,6 @@ export const signUp = (credentials, history) => {
 export const logout = event => {
   return dispatch => {
     dispatch(clearCurrentUser())
-    // dispatch(clearTasks())
     return fetch('http://localhost:3001/api/v1/logout', {
       credentials: "include",
       method: "DELETE"
@@ -90,14 +88,13 @@ export const getCurrentUser = () => {
       })
       .then(response => {
         if (response.error) {
-          // alert(response.error)
-          console.log(response.error)
+          alert(response.error)
         } else {
           dispatch(setCurrentUser(response.data))
           dispatch(setTasks(response.included))
         }
       })
-      .catch(console.log)
+      .catch(alert)
   }
 }
 

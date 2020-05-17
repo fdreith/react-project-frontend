@@ -24,7 +24,7 @@ export const postTask = task => {
           dispatch(addTask(response.data))
         }
       })
-    // .catch(alert) 
+    .catch(alert) 
   }
 }
 
@@ -57,7 +57,7 @@ export const updateTask = (task, id, history) => {
         }
         return response.data
       })
-    // .catch(alert) 
+    .catch(alert) 
   }
 }
 
@@ -79,9 +79,6 @@ export const deleteTask = (taskId, history) => {
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${taskId}`, {
       method: "DELETE",
-      // headers: {
-      //   "Content-Type": "application/json"
-      // }
     })
       .then(resp => resp.json())
       .then(response => {
@@ -93,7 +90,7 @@ export const deleteTask = (taskId, history) => {
           throw new Error(response.errors)
         }
       })
-    // .catch(alert) 
+    .catch(alert) 
   }
 }
 

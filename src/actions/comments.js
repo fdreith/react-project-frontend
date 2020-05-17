@@ -9,13 +9,12 @@ export const fetchComments = () => {
       .then(resp => resp.json())
       .then(response => {
         if (response.error) {
-          // alert(response.error)
-          console.log(response.error)
+          alert(response.error)
         } else {
           dispatch(setComments(response.data))
         }
       })
-      .catch(console.log)
+      .catch(alert)
   }
 }
 
@@ -44,7 +43,7 @@ export const postComment = comment => {
           dispatch(addComment(response))
         }
       })
-    // .catch(alert) 
+    .catch(alert) 
   }
 }
 
@@ -69,7 +68,7 @@ export const deleteComment = (commentId, history) => {
           throw new Error(response.errors)
         }
       })
-    // .catch(alert) 
+    .catch(alert) 
   }
 }
 

@@ -11,14 +11,13 @@ export const fetchDepartments = () => {
       .then(resp => resp.json())
       .then(response => {
         if (response.error) {
-          // alert(response.error)
-          console.log(response.error)
+          alert(response.error)
         } else {
           dispatch(setDepartments(response.data))
           dispatch(setUsers(response.data))
         }
       })
-      .catch(console.log)
+      .catch(alert)
   }
 }
 
