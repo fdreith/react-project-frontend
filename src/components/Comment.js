@@ -11,15 +11,13 @@ const Comment = (props) => {
   return (
     <div>
       <p>
-        {findUser(props.comment.user_id).name}: {props.comment.content} at {displayDateAndTime(props.comment.created_at)}
+        {findUser(props.comment.user_id).name} at {displayDateAndTime(props.comment.created_at)} : {props.comment.content}
       </p>
-      {console.log(props)}
     </div>
   )
 }
 
 const displayDateAndTime = (dateString) => {
-  debugger
   const date = new Date(dateString)
   const month = date.getMonth() + 1
   const hour = date.getHours()
@@ -27,6 +25,7 @@ const displayDateAndTime = (dateString) => {
   return `${hour}:${min} on ${month}-${date.getDate()}-${date.getFullYear()}`
 
 }
+
 const mapStateToProps = state => {
   return ({
     users: state.users
