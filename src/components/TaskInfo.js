@@ -27,8 +27,9 @@ class TaskInfo extends Component {
           <p>Assigned to: {this.props.task.attributes.user.name} by {this.props.task.attributes.owner.name}</p>
           {this.props.completed ||
             <button onClick={this.handleClick}>Completed</button>}
-          {this.props.task.attributes.comments.map(comment => <Comment key={comment.id} comment={comment} />)}
-          <CommentForm taskId={this.props.task.attributes.id} />
+
+          {this.props.comments.map(comment => comment.attributes.task_id === this.props.task.attributes.id && <Comment key={comment.attributes.id} comment={comment} currentUser={this.props.currentUser}/>)}
+          <CommentForm taskId={this.props.task.attributes.id} currentUser={this.props.currentUser}/>
           <Link to={`/tasks/${this.props.task.attributes.id}/edit`}> Edit Task </Link>
         </Card>
       </div>
@@ -36,6 +37,11 @@ class TaskInfo extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return ({
+    comments: state.comments,
+    currentUser: state.currentUser
+  })
+}
 
-
-export default connect(null, { updateTask })(TaskInfo)
+export default connect(mapStateToProps, { updateTask })(TaskInfo)

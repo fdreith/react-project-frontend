@@ -36,13 +36,8 @@ class CommentForm extends Component {
     )
   }
 }
-const mapStateToProps = state => {
-  return ({
-    currentUser: state.currentUser,
-  })
-}
 
-export default connect(mapStateToProps, { postComment })(CommentForm)
+export default connect(null, { postComment })(CommentForm)
 
 
 
