@@ -38,8 +38,8 @@ export const postComment = comment => {
     })
       .then(resp => resp.json())
       .then(response => {
-        if (response.error) {
-          alert(response.error)
+        if (response.content) {
+          alert(response.content)
         } else {
           dispatch(addComment(response))
         }

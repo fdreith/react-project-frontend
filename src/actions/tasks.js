@@ -18,8 +18,8 @@ export const postTask = task => {
     })
       .then(resp => resp.json())
       .then(response => {
-        if (response.error) {
-          alert(response.error)
+        if (response.content) {
+          alert(response.content)
         } else {
           dispatch(addTask(response.data))
         }
@@ -47,8 +47,8 @@ export const updateTask = (task, id, history) => {
     })
       .then(resp => resp.json())
       .then(response => {
-        if (response.error) {
-          alert(response.error)
+        if (response.content) {
+          alert(response.content)
         } else {
           history.push('/')
           response.data.attributes.completed === true ?
