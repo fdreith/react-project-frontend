@@ -20,10 +20,10 @@ class CommentForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.postComment(this.state)
-    this.setState = ({
+    this.setState({
       content: "",
       task_id: this.props.taskId,
-      user_id: this.props.currentUser.id
+      user_id: parseInt(this.props.currentUser.id)
     })
   }
 
