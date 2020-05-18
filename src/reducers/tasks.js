@@ -75,7 +75,7 @@ const convertDates = (tasks) => {
       return task
     })
   } else {
-    tasks.attributes.due_date = new Date(tasks.task.attributes.due_date)
+    tasks.attributes.due_date = new Date(tasks.attributes.due_date)
     return tasks
   }
 
