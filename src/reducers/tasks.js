@@ -2,23 +2,11 @@ export default (state = {
   myTasks: [], assignedTasks: [], completedTasks: []
 }, action) => {
 
-  const isMyTask = (action) => {
-    if (action.task) {
-      return action.task.relationships.user.data.id === action.task.relationships.owner.data.id
-    } else if (action.taskId) {
-      return state.myTasks.find(task => parseInt(task.id) === action.taskId)
+  const isMyTask = (taskOrTaskId) => {
+    if (taskOrTaskId.task) {
+      return taskOrTaskId.task.attributes.user.id === taskOrTaskId.task.attributes.owner.id
     } else {
-      return state.myTasks.find(task => parseInt(task.id) === action.comment.task_id)
-    }
-  }
-
-  const isCompleted = (action) => {
-    if (action.task) {
-      return action.task.attributes.completed
-    } else if (action.taskId) {
-      return state.completedTasks.find(task => parseInt(task.id) === action.taskId)
-    } else {
-      return state.completedTasks.find(task => parseInt(task.id) === action.comment.task_id)
+      return state.myTasks.find(task => parseInt(task.id) === taskOrTaskId)
     }
   }
 
@@ -41,11 +29,7 @@ export default (state = {
       }
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action)
-      if (isCompleted(convertedTask)) {
-        const completedTasks = state.completedTasks.map(task => replaceIfEqual(task, convertedTask.task))
-        return { ...state, completedTasks }
-      }
-      else if (isMyTask(convertedTask)) {
+      if (isMyTask(action.task.attributes.id)) {
         const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask.task))
         return { ...state, myTasks }
       } else {
@@ -53,7 +37,7 @@ export default (state = {
         return { ...state, assignedTasks }
       }
     case 'COMPLETED_TASK':
-      if (isMyTask(action)) {
+      if (isMyTask(action.task.attributes.id)) {
         const myTasks = state.myTasks.filter(task => task.id !== action.task.id)
         const completedTasks = [...state.completedTasks, action.task]
         return { ...state, myTasks, completedTasks }
@@ -62,10 +46,7 @@ export default (state = {
         return { ...state, assignedTasks }
       }
     case 'DELETE_TASK':
-      if (isCompleted(action)) {
-        const completedTasks = state.completedTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, completedTasks }
-      } else if (isMyTask(action)) {
+      if (isMyTask(action.taskId)) {
         const myTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
         return { ...state, myTasks }
       } else {
@@ -85,20 +66,6 @@ const replaceIfEqual = (task, actionTask) => {
   }
 }
 
-const sortByDate = (tasks) => {
-  return tasks.sort(function (a, b) {
-    const dueDateA = a.attributes.due_date
-    const dueDateB = b.attributes.due_date
-    if (dueDateA < dueDateB) {
-      return -1
-    }
-    if (dueDateA > dueDateB) {
-      return 1
-    }
-    return 0
-  })
-}
-
 const convertDates = (tasks) => {
   if (Array.isArray(tasks)) {
     return tasks.map(task => {
@@ -106,7 +73,8 @@ const convertDates = (tasks) => {
       return task
     })
   } else {
-    return tasks.task.attributes.due_date = new Date(tasks.task.attributes.due_date)
+    tasks.task.attributes.due_date = new Date(tasks.task.attributes.due_date)
+    return tasks
   }
 
 }

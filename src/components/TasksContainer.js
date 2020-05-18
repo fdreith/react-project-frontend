@@ -43,30 +43,27 @@ class TasksContainer extends Component {
   }
 }
 
-// const sortByDate = (tasks) => {
-//   return tasks.sort(function (a, b) {
-//     const dueDateA = a.attributes.due_date
-//     const dueDateB = b.attributes.due_date
-//     if (dueDateA < dueDateB) {
-//       return -1
-//     }
-//     if (dueDateA > dueDateB) {
-//       return 1
-//     }
-//     return 0
-//   })
-// }
+const sortByDate = (tasks) => {
+  return tasks.sort(function (a, b) {
+    const dueDateA = a.attributes.due_date
+    const dueDateB = b.attributes.due_date
+    if (dueDateA < dueDateB) {
+      return -1
+    }
+    if (dueDateA > dueDateB) {
+      return 1
+    }
+    return 0
+  })
+}
 
 const mapStateToProps = state => {
   return ({
     currentUser: state.currentUser,
     users: state.users,
-    // myTasks: sortByDate(state.tasks.myTasks),
-    // assignedTasks: sortByDate(state.tasks.assignedTasks),
-    // completedTasks: sortByDate(state.tasks.completedTasks)
-    myTasks: state.tasks.myTasks,
-    assignedTasks: state.tasks.assignedTasks,
-    completedTasks: state.tasks.completedTasks
+    myTasks: sortByDate(state.tasks.myTasks),
+    assignedTasks: sortByDate(state.tasks.assignedTasks),
+    completedTasks: sortByDate(state.tasks.completedTasks)
 
   })
 }

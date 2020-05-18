@@ -9,12 +9,13 @@ export const fetchComments = () => {
       .then(resp => resp.json())
       .then(response => {
         if (response.error) {
-          alert(response.error)
+          console.log(response.error)
+          // alert(response.error)
         } else {
           dispatch(setComments(response.data))
         }
       })
-      .catch(alert)
+    // .catch(alert)
   }
 }
 
@@ -38,12 +39,14 @@ export const postComment = comment => {
       .then(resp => resp.json())
       .then(response => {
         if (response.content) {
-          alert(response.content)
+          console.log(response.content)
+
+          // alert(response.content)
         } else {
           dispatch(addComment(response))
         }
       })
-    .catch(alert) 
+      // .catch(alert)
   }
 }
 
@@ -68,7 +71,7 @@ export const deleteComment = (commentId, history) => {
           throw new Error(response.errors)
         }
       })
-    .catch(alert) 
+      .catch(alert)
   }
 }
 

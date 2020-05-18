@@ -19,12 +19,14 @@ export const postTask = task => {
       .then(resp => resp.json())
       .then(response => {
         if (response.content) {
-          alert(response.content)
+          console.log(response.content)
+
+          // alert(response.content)
         } else {
           dispatch(addTask(response.data))
         }
       })
-    .catch(alert) 
+    // .catch(alert) 
   }
 }
 
@@ -48,7 +50,8 @@ export const updateTask = (task, id, history) => {
       .then(resp => resp.json())
       .then(response => {
         if (response.content) {
-          alert(response.content)
+          // alert(response.content)
+          console.log(response.content)
         } else {
           history.push('/')
           response.data.attributes.completed === true ?
@@ -57,7 +60,7 @@ export const updateTask = (task, id, history) => {
         }
         return response.data
       })
-    .catch(alert) 
+    // .catch(alert) 
   }
 }
 
@@ -90,7 +93,7 @@ export const deleteTask = (taskId, history) => {
           throw new Error(response.errors)
         }
       })
-    .catch(alert) 
+      .catch(alert)
   }
 }
 
