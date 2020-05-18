@@ -10,7 +10,7 @@ Task Assign is a task management app that allows you to create tasks with due da
 
 To run, copy the repo and run yarn install and run yarn start and [http://localhost:3000](http://localhost:3000) will open in the browser.
 <br />
-Run the backend by going to [https://github.com/fdreith/react-project-backend] (https://github.com/fdreith/react-project-backend), copy the repo and run bundle install, and rails s to start the server on [http://localhost:3001](http://localhost:3001).<br />
+Run the backend by going to (https://github.com/fdreith/react-project-backend), copy the repo and run bundle install, and rails s to start the server on [http://localhost:3001](http://localhost:3001).<br />
 
 ## License
 
