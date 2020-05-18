@@ -29,7 +29,7 @@ export default (state = {
         return { ...state, assignedTasks: [...state.assignedTasks, newTask] }
       }
     case 'UPDATE_TASK':
-      const convertedTask = convertDates(action)
+      const convertedTask = convertDates(action.task)
       if (isMyTask(action.task.attributes.id)) {
         const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask.task))
         return { ...state, myTasks }
@@ -68,13 +68,14 @@ const replaceIfEqual = (task, actionTask) => {
 }
 
 const convertDates = (tasks) => {
+  debugger
   if (Array.isArray(tasks)) {
     return tasks.map(task => {
       task.attributes.due_date = new Date(task.attributes.due_date)
       return task
     })
   } else {
-    tasks.task.attributes.due_date = new Date(tasks.task.attributes.due_date)
+    tasks.attributes.due_date = new Date(tasks.task.attributes.due_date)
     return tasks
   }
 
