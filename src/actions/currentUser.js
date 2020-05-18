@@ -30,6 +30,7 @@ export const login = (credentials, history) => {
           alert(response.error)
         } else {
           dispatch(setCurrentUser(response.data))
+          dispatch(setTasks(response.included))
         }
       })
       .catch(alert)
