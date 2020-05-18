@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
-import { Link } from 'react-router-dom'
 
 class Task extends Component {
   constructor(props) {

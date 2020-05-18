@@ -68,7 +68,6 @@ const replaceIfEqual = (task, actionTask) => {
 }
 
 const convertDates = (tasks) => {
-  debugger
   if (Array.isArray(tasks)) {
     return tasks.map(task => {
       task.attributes.due_date = new Date(task.attributes.due_date)
