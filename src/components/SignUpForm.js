@@ -45,7 +45,6 @@ class SignUpForm extends Component {
   render() {
     return (
       < form onSubmit={this.handleSubmit} >
-        {console.log(this.props)}
         <label>New Users Sign Up:   </label>
         <br></br>
         <input placeholder="name" value={this.state.name} name="name" type="text" onChange={this.handleChange} /><br></br>

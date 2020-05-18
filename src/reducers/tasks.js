@@ -40,15 +40,16 @@ export default (state = {
         return { ...state, assignedTasks: [...state.assignedTasks, action.task] }
       }
     case 'UPDATE_TASK':
-      if (isCompleted(action)) {
-        const completedTasks = state.completedTasks.map(task => replaceIfEqual(task, action.task))
+      const convertedTask = convertDates(action)
+      if (isCompleted(convertedTask)) {
+        const completedTasks = state.completedTasks.map(task => replaceIfEqual(task, convertedTask.task))
         return { ...state, completedTasks }
       }
-      else if (isMyTask(action)) {
-        const myTasks = state.myTasks.map(task => replaceIfEqual(task, action.task))
+      else if (isMyTask(convertedTask)) {
+        const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask.task))
         return { ...state, myTasks }
       } else {
-        const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, action.task))
+        const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, convertedTask.task))
         return { ...state, assignedTasks }
       }
     case 'COMPLETED_TASK':
@@ -82,12 +83,30 @@ const replaceIfEqual = (task, actionTask) => {
   } else {
     return task
   }
+}
 
+const sortByDate = (tasks) => {
+  return tasks.sort(function (a, b) {
+    const dueDateA = a.attributes.due_date
+    const dueDateB = b.attributes.due_date
+    if (dueDateA < dueDateB) {
+      return -1
+    }
+    if (dueDateA > dueDateB) {
+      return 1
+    }
+    return 0
+  })
 }
 
 const convertDates = (tasks) => {
-  return tasks.map(task => {
-    task.attributes.due_date = new Date(task.attributes.due_date)
-    return task
-  })
+  if (Array.isArray(tasks)) {
+    return tasks.map(task => {
+      task.attributes.due_date = new Date(task.attributes.due_date)
+      return task
+    })
+  } else {
+    return tasks.task.attributes.due_date = new Date(tasks.task.attributes.due_date)
+  }
+
 }

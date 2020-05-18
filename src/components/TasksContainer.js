@@ -14,12 +14,12 @@ class TasksContainer extends Component {
       <div className="tasks-container">
         <Switch>
           <Route
-            path="/tasks/assigned"
-            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.props.assignedTasks} />}
-          />
-          <Route
             exact path="/"
             render={(routerProps) => <MyTasks {...routerProps} myTasks={this.props.myTasks} currentUser={this.props.currentUser} />}
+          />
+          <Route
+            path="/tasks/assigned"
+            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.props.assignedTasks} />}
           />
           <Route
             path="/tasks/completed"
@@ -43,28 +43,30 @@ class TasksContainer extends Component {
   }
 }
 
-const sortByDate = (tasks) => {
-  return tasks.sort(function (a, b) {
-    const dueDateA = a.attributes.due_date
-    const dueDateB = b.attributes.due_date
-    if (dueDateA < dueDateB) {
-      return -1
-    }
-    if (dueDateA > dueDateB) {
-      return 1
-    }
-    return 0
-  })
-}
+// const sortByDate = (tasks) => {
+//   return tasks.sort(function (a, b) {
+//     const dueDateA = a.attributes.due_date
+//     const dueDateB = b.attributes.due_date
+//     if (dueDateA < dueDateB) {
+//       return -1
+//     }
+//     if (dueDateA > dueDateB) {
+//       return 1
+//     }
+//     return 0
+//   })
+// }
 
 const mapStateToProps = state => {
   return ({
     currentUser: state.currentUser,
     users: state.users,
-    tasks: state.tasks,
-    myTasks: sortByDate(state.tasks.myTasks),
-    assignedTasks: sortByDate(state.tasks.assignedTasks),
-    completedTasks: sortByDate(state.tasks.completedTasks)
+    // myTasks: sortByDate(state.tasks.myTasks),
+    // assignedTasks: sortByDate(state.tasks.assignedTasks),
+    // completedTasks: sortByDate(state.tasks.completedTasks)
+    myTasks: state.tasks.myTasks,
+    assignedTasks: state.tasks.assignedTasks,
+    completedTasks: state.tasks.completedTasks
 
   })
 }

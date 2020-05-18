@@ -11,6 +11,13 @@ import LoginForm from './components/LoginForm.js'
 import SignUpForm from './components/SignUpForm.js'
 import { withRouter } from 'react-router-dom';
 
+import MyTasks from './components/MyTasks.js'
+import TaskForm from './components/TaskForm.js'
+import AssignedTasks from './components/AssignedTasks.js'
+import CompletedTasks from './components/CompletedTasks.js'
+import EditTask from './components/EditTask.js'
+import { Switch, Route } from 'react-router-dom'
+
 class App extends Component {
 
   componentDidMount() {
