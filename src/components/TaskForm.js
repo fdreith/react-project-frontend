@@ -66,7 +66,7 @@ class TaskForm extends Component {
         <label htmlFor="user-select">Who is this task assigned to:</label>
         <br></br>
         <select name="user_id" id="user-select" onChange={this.handleChange}>
-          <option value="">Choose a user</option>
+          <option value={this.props.currentUser.id}>Choose a user</option>
           {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
         </select>
         <br></br>
