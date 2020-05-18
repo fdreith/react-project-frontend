@@ -22,10 +22,11 @@ export default (state = {
         .filter(task => task.type === "task")
       return { myTasks, assignedTasks, completedTasks }
     case 'ADD_TASK':
+      const newTask = convertDates(action.task)
       if (isMyTask(action)) {
-        return { ...state, myTasks: [...state.myTasks, action.task] }
+        return { ...state, myTasks: [...state.myTasks, newTask] }
       } else {
-        return { ...state, assignedTasks: [...state.assignedTasks, action.task] }
+        return { ...state, assignedTasks: [...state.assignedTasks, newTask] }
       }
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action)

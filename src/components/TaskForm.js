@@ -35,9 +35,7 @@ class TaskForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    const task = this.state
-    task.due_date = task.due_date.toString()
-    this.props.postTask(task)
+    this.props.postTask(this.state)
     this.setState({
       content: "",
       due_date: new Date(),

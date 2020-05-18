@@ -64,7 +64,6 @@ const mapStateToProps = state => {
     myTasks: sortByDate(state.tasks.myTasks),
     assignedTasks: sortByDate(state.tasks.assignedTasks),
     completedTasks: sortByDate(state.tasks.completedTasks)
-
   })
 }
 
