@@ -31,10 +31,10 @@ export default (state = {
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action.task)
       if (isMyTask(action.task.attributes.id)) {
-        const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask.task))
+        const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask))
         return { ...state, myTasks }
       } else {
-        const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, convertedTask.task))
+        const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, convertedTask))
         return { ...state, assignedTasks }
       }
     case 'COMPLETED_TASK':
