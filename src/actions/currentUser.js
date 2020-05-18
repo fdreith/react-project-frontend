@@ -56,7 +56,7 @@ export const signUp = (credentials, history) => {
           alert(response.error)
         } else {
           dispatch(setCurrentUser(response.data))
-          history.push('/')
+          // history.push('/')
         }
       })
       .catch(alert)

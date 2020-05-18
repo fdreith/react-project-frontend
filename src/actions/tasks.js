@@ -54,6 +54,7 @@ export const updateTask = (task, id, history) => {
           console.log(response.content)
         } else {
           history.push('/')
+          // history.goBack()
           response.data.attributes.completed === true ?
             dispatch(completedTask(response.data)) :
             dispatch(updateTaskStore(response.data))
