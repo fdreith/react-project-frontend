@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { postTask } from '../actions/tasks'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Button from 'react-bootstrap/Button'
 
 
 
@@ -69,7 +70,7 @@ class TaskForm extends Component {
         </select>
         <br></br>
         <br></br>
-        <input type="submit" value="Add Task" />
+        <Button variant="outline-secondary" type="submit">Add Task</Button>
       </form>
     )
   }

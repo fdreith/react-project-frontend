@@ -43,6 +43,9 @@ class EditTask extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.updateTask(this.state, this.props.task.attributes.id, this.props.history)
+    this.setState({
+      initialState
+    })
   }
 
   render() {

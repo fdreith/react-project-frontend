@@ -50,7 +50,7 @@ export const updateTask = (task, id, history) => {
         if (response.content) {
           alert(response.content)
         } else {
-          history.goBack(-2)
+          history.go(-1)
           response.data.attributes.completed === true ?
             dispatch(completedTask(response.data)) :
             dispatch(updateTaskStore(response.data))
@@ -76,6 +76,7 @@ export const completedTask = task => {
 }
 
 export const deleteTask = (taskId, history) => {
+  history.go(-1)
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${taskId}`, {
       method: "DELETE",
@@ -83,7 +84,6 @@ export const deleteTask = (taskId, history) => {
       .then(resp => resp.json())
       .then(response => {
         if (response.message) {
-          history.push('/')
           // alert(response.message)
           dispatch(deleteTaskStore(taskId))
         } else {
