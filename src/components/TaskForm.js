@@ -4,6 +4,7 @@ import { postTask } from '../actions/tasks'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 
 
@@ -47,13 +48,13 @@ class TaskForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label><h6>New Task:   </h6></label>
-        <br></br>
-        <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
-        <br></br>
-        <div className="form-group">
-          <label>Select Due Date:</label>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group >
+          <Form.Label>New Task:</Form.Label>
+          <Form.Control value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Select Due Date:</Form.Label>
           <br></br>
           <DatePicker
             selected={this.state.due_date}
@@ -61,17 +62,16 @@ class TaskForm extends Component {
             name="due_date"
             dateFormat="MM/dd/yyyy"
           />
-        </div>
-        <label htmlFor="user-select">Who is this task assigned to:</label>
-        <br></br>
-        <select name="user_id" id="user-select" onChange={this.handleChange}>
-          <option value={this.props.currentUser.id}>Choose a user</option>
-          {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
-        </select>
-        <br></br>
-        <br></br>
-        <Button variant="outline-secondary" type="submit">Add Task</Button>
-      </form>
+        </Form.Group>
+        <Form.Group >
+          <Form.Label>Who is this task assigned to:</Form.Label>
+          <Form.Control as="select" name="user_id" id="user-select" onChange={this.handleChange} custom>
+            <option value={this.props.currentUser.id}>Choose a user</option>
+            {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
+          </Form.Control>
+        </Form.Group>
+        <Button size="sm" variant="outline-secondary" type="submit">Submit</Button>
+      </Form>
     )
   }
 }
