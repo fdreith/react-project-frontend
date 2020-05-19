@@ -31,6 +31,7 @@ export const login = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(response.data))
           dispatch(setTasks(response.included))
+          history.push("/tasks/my-tasks")
         }
       })
       .catch(alert)
