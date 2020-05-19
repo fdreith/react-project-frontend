@@ -1,6 +1,5 @@
 import React from 'react'
 import Logout from './Logout.js'
-import { NavLink } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { LinkContainer } from 'react-router-bootstrap'

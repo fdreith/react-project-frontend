@@ -7,8 +7,6 @@ import CompletedTasks from './CompletedTasks.js'
 import EditTask from './EditTask.js'
 import { Switch, Route } from 'react-router-dom'
 
-import Logout from './Logout'
-
 class TasksContainer extends Component {
 
   render() {
