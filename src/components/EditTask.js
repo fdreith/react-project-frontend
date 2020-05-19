@@ -53,31 +53,6 @@ class EditTask extends Component {
   render() {
     return (
       <div className="task-edit">
-        {/* //   <form onSubmit={this.handleSubmit}>
-      //     <label>Edit Task:   </label>
-      //     <br></br>
-      //     <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
-      //     <br></br>
-      //     <div className="form-group">
-      //       <label>Select Due Date:</label>
-      //       <br></br>
-      //       <DatePicker */}
-        {/* //         selected={this.state.due_date}
-      //         onChange={this.handleDateChange}
-      //         name="due_date"
-      //         dateFormat="MM/dd/yyyy"
-      //       />
-      //     </div> */}
-        {/* //     <label htmlFor="user-select">Who is this task assigned to:</label>
-      //     <br></br>
-      //     <select name="user_id" id="user-select" onChange={this.handleChange}>
-      //       <option value={this.props.task.attributes.user.id}>Choose a user</option>
-      //       {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
-      //     </select>
-      //     <br></br>
-      //     <br></br>
-      //     <input type="submit" value="Update Task" />
-      //   </form> */}
         <Form onSubmit={this.handleSubmit}>
           <Form.Group >
             <Form.Label>Edit Task:</Form.Label>
@@ -105,8 +80,6 @@ class EditTask extends Component {
         <br></br>
         {this.props.task && <Button size="sm" variant="outline-secondary" onClick={() => this.props.deleteTask(this.props.task.attributes.id, this.props.history)} type="button" value="Delete Task"> Delete Task </Button>}
       </div>
-
-
     )
   }
 }
