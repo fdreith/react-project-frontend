@@ -5,7 +5,7 @@ const CompletedTasks = props => {
 
   return (
     <div className="completedTasks">
-      <h5>My Completed Tasks:</h5>
+      <h6>My Completed Tasks:</h6>
       <ul>
         {props.completedTasks && props.completedTasks.map(task => <Task key={task.id} task={task} history={props.history} completed={"Misson Accomplished! This task has been completed."}/>)}
       </ul>

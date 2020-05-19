@@ -6,8 +6,7 @@ const MyTasks = props => {
 
   return (
     <div className="myTasks">
-      <h5>{props.currentUser.attributes.name}'s
-  Tasks:</h5>
+      <h6>{props.currentUser.attributes.name}'s Tasks:</h6>
       <ul>
         {props.myTasks && props.myTasks.map(task => <Task key={task.id} task={task} history={props.history} />)}
       </ul>
