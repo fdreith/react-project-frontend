@@ -18,8 +18,8 @@ class LoginForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.login(this.state)
-    this.setState = ({
+    this.props.login(this.state, this.props.history)
+    this.setState({
       email: "",
       password: ""
     })

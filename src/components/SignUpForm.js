@@ -32,7 +32,7 @@ class SignUpForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.signUp(this.state)
-    this.setState = ({
+    this.setState({
       name: "",
       email: "",
       password: "",
