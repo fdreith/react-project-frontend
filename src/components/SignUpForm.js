@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { signUp } from '../actions/currentUser'
 import { connect } from 'react-redux'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 
 class SignUpForm extends Component {
@@ -32,41 +34,42 @@ class SignUpForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.signUp(this.state)
-    this.setState({
-      name: "",
-      email: "",
-      password: "",
-      department_id: null,
-      supervisor: false
-    })
   }
 
 
   render() {
     return (
-      < form onSubmit={this.handleSubmit} >
-        <label>New Users Sign Up:   </label>
-        <br></br>
-        <input placeholder="name" value={this.state.name} name="name" type="text" onChange={this.handleChange} /><br></br>
-        <input placeholder="email" value={this.state.email} name="email" type="text" onChange={this.handleChange} /><br></br>
-        <input placeholder="password" value={this.state.password} name="password" type="text" onChange={this.handleChange} />
-        <br></br>
-        <div>
-          <label>Department:</label>
-          {this.props.departments.map(department => <div key={department.attributes.id}><> <input id={department.attributes.id} key={department.attributes.id} type="radio" name="department_id" value={department.attributes.id} onChange={this.handleChange} /> <label htmlFor={department.attributes.id}>{department.attributes.name}</label></></div>)}
-        </div>
-        <br></br>
-        <div>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Label>Sign Up:</Form.Label>
+        <Form.Group >
+          <Form.Label>Name:</Form.Label>
+          <Form.Control placeholder="name" value={this.state.name} name="name" type="text" onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group >
+          <Form.Label>Email:</Form.Label>
+          <Form.Control placeholder="email" value={this.state.email} name="email" type="text" onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control placeholder="password" value={this.state.password} name="password" type="password" onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group >
+          <Form.Label>Department:</Form.Label>
+          <Form.Control as="select" name="department_id" id="department" onChange={this.handleChange} custom>
+            <option value="">Choose a Department</option>
+            {this.props.departments.map(department => <option key={department.attributes.id} value={department.attributes.id}>{department.attributes.name}</option>)}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
           <label>Supervisor?</label>
           <br></br>
           <input type="radio" name="supervisor" id="sup-true" value="true" onChange={this.handleChange} />
           <label htmlFor="sup-true">Yes</label>
           <input type="radio" name="supervisor" id="sup-false" value="false" defaultChecked={true} onChange={this.handleChange} />
           <label htmlFor="sup-false">No</label>
-        </div>
-        <br></br>
-        < input type="submit" value="Sign Up" />
-      </form >
+        </Form.Group>
+        <Button size="sm" variant="outline-secondary" type="submit">Login</Button>
+      </Form>
     )
   }
 }

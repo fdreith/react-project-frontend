@@ -39,6 +39,7 @@ export const login = (credentials, history) => {
 }
 
 export const signUp = (credentials, history) => {
+  debugger
   return dispatch => {
     const userInfo = {
       user: credentials

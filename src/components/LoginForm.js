@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { login } from '../actions/currentUser'
 import { connect } from 'react-redux'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 
 class LoginForm extends Component {
@@ -19,21 +21,21 @@ class LoginForm extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.props.login(this.state, this.props.history)
-    this.setState({
-      email: "",
-      password: ""
-    })
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Login:   </label>
-        <br></br>
-        <input placeholder="email" value={this.state.email} name="email" type="text" onChange={this.handleChange} />
-        <input placeholder="password" value={this.state.password} name="password" type="text" onChange={this.handleChange} />
-        <input type="submit" value="Log In" />
-      </form>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group >
+          <Form.Label>Login:</Form.Label>
+          <Form.Control placeholder="email" value={this.state.email} name="email" type="text" onChange={this.handleChange} />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Password:</Form.Label>
+          <Form.Control placeholder="password" value={this.state.password} name="password" type="password" onChange={this.handleChange} />
+        </Form.Group>
+        <Button size="sm" variant="outline-secondary" type="submit">Login</Button>
+      </Form>
     )
   }
 }
