@@ -7,6 +7,8 @@ import CompletedTasks from './CompletedTasks.js'
 import EditTask from './EditTask.js'
 import { Switch, Route } from 'react-router-dom'
 
+import Logout from './Logout'
+
 class TasksContainer extends Component {
 
   render() {
@@ -14,7 +16,7 @@ class TasksContainer extends Component {
       <div className="tasks-container">
         <Switch>
           <Route
-            exact path="/"
+            exact path="/tasks/my-tasks"
             render={(routerProps) => <MyTasks {...routerProps} myTasks={this.props.myTasks} currentUser={this.props.currentUser} />}
           />
           <Route
@@ -30,10 +32,10 @@ class TasksContainer extends Component {
             render={(routerProps) => {
               const tasks = [this.props.myTasks, this.props.assignedTasks].flat()
               const task = tasks.find(task => task.attributes.id === parseInt(routerProps.match.params.id))
-              return <EditTask {...routerProps} task={task}
-              />
+              return <EditTask {...routerProps} task={task} />
             }}
-          />}
+          />
+
         </Switch>
         <hr />
         <TaskForm />
