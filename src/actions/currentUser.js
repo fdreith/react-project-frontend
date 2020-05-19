@@ -89,13 +89,12 @@ export const getCurrentUser = () => {
       })
       .then(response => {
         if (response.error) {
-          alert(response.error)
+          console.log(response.error)
         } else {
           dispatch(setCurrentUser(response.data))
           dispatch(setTasks(response.included))
         }
       })
-      .catch(alert)
   }
 }
 
