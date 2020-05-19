@@ -22,14 +22,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavBar loggedIn={this.props.loggedIn} />
+
+        <NavBar loggedIn={this.props.loggedIn} history={this.props.history}/>
         {this.props.loggedIn ?
           <TasksContainer />
           :
-          <><LoginForm /><br></br><br></br>
+          <><LoginForm history={this.props.history}/><br></br><br></br>
             <SignUpForm departments={this.props.departments} />
-          </>}
-
+            </>}
       </div>
     );
   }
