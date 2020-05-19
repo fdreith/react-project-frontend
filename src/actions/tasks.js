@@ -57,7 +57,7 @@ export const updateTask = (task, id, history) => {
         }
         return response.data
       })
-    .catch(alert) 
+      .catch(alert)
   }
 }
 
@@ -84,13 +84,13 @@ export const deleteTask = (taskId, history) => {
       .then(response => {
         if (response.message) {
           history.push('/')
-          alert(response.message)
+          // alert(response.message)
           dispatch(deleteTaskStore(taskId))
         } else {
           throw new Error(response.errors)
         }
       })
-      .catch(alert)
+    // .catch(alert)
   }
 }
 

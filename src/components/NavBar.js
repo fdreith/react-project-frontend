@@ -1,7 +1,6 @@
 import React from 'react'
-import Logout from '../components/Logout.js'
+import Logout from './Logout.js'
 import { NavLink } from 'react-router-dom'
-
 
 const NavBar = props => {
 
@@ -18,7 +17,6 @@ const NavBar = props => {
         : null}
     </div>
   )
-
 }
 
 export default NavBar
