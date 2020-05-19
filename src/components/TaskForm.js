@@ -47,7 +47,7 @@ class TaskForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>New Task:   </label>
+        <label><h6>New Task:   </h6></label>
         <br></br>
         <input value={this.state.content} name="content" type="textarea" onChange={this.handleChange} />
         <br></br>
