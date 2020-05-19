@@ -9,11 +9,11 @@ import Container from 'react-bootstrap/Container'
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router >
-      <Container fluid="sm">
+    <Container >
+      <Router >
         <App />
-      </Container>
-    </Router>
+      </Router>
+    </Container >
   </Provider>,
   document.getElementById('root')
 );
