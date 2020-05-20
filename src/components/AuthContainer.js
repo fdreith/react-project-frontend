@@ -9,6 +9,10 @@ import { connect } from 'react-redux';
 
 class AuthContainer extends Component {
 
+  componentDidMount() {
+    this.props.history.push('/login')
+  }
+
   render() {
     return (
       <Switch>
