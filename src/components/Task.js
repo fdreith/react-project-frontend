@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
 
 class Task extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showComponent: false,
-    }
+  state = {
+    showComponent: false,
   }
 
   handleClick = event => {
