@@ -7,9 +7,10 @@ import TasksContainer from './components/TasksContainer.js'
 import NavBar from './components/NavBar.js'
 import { fetchDepartments } from './actions/departments'
 import { fetchComments } from './actions/comments'
-import LoginForm from './components/LoginForm.js'
-import SignUpForm from './components/SignUpForm.js'
 import { withRouter } from 'react-router-dom';
+import AuthContainer from './components/AuthContainer'
+
+
 
 class App extends Component {
 
@@ -22,15 +23,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <NavBar loggedIn={this.props.loggedIn} history={this.props.history}/>
+        <NavBar loggedIn={this.props.loggedIn} history={this.props.history} />
         {this.props.loggedIn ?
           <TasksContainer />
           :
-          <><LoginForm history={this.props.history}/><br></br><br></br>
-            <SignUpForm departments={this.props.departments} />
-            </>}
-      </div>
+          <AuthContainer history={this.props.history} />
+        }
+      </div >
     );
   }
 }

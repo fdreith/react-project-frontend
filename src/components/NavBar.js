@@ -30,9 +30,15 @@ const NavBar = props => {
             </Nav>
           </Navbar>
           :
-          <Navbar bg="light" >
+          <Navbar className="bg-light justify-content-between" >
             <Navbar.Brand>Task Assign</Navbar.Brand>
             <Nav >
+              <LinkContainer to="/signup">
+                <Button variant="light"> Sign Up </Button>
+              </LinkContainer>
+              <LinkContainer to="/login">
+                <Button variant="light"> Login </Button>
+              </LinkContainer>
             </Nav>
           </Navbar>
         }
