@@ -9,6 +9,10 @@ import { Switch, Route } from 'react-router-dom'
 
 class TasksContainer extends Component {
 
+  componentDidMount() {
+    this.props.history.push('/tasks/my-tasks')
+  }
+
   render() {
     return (
       <div className="tasks-container">

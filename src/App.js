@@ -25,7 +25,7 @@ class App extends Component {
       <div className="App">
         <NavBar loggedIn={this.props.loggedIn} history={this.props.history} />
         {this.props.loggedIn ?
-          <TasksContainer />
+          <TasksContainer history={this.props.history}/>
           :
           <AuthContainer history={this.props.history} />
         }
