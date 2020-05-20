@@ -74,4 +74,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default connect(null, { signUp })(SignUpForm)
+export default SignUpForm
