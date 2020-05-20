@@ -65,7 +65,13 @@ class TaskForm extends Component {
         </Form.Group>
         <Form.Group >
           <Form.Label>Who is this task assigned to:</Form.Label>
-          <Form.Control as="select" name="user_id" id="user-select" onChange={this.handleChange} custom>
+          <Form.Control
+            as="select"
+            name="user_id"
+            id="user-select"
+            value={this.state.user_id}
+            onChange={this.handleChange}
+            custom>
             <option value={this.props.currentUser.id}>Choose a user</option>
             {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
           </Form.Control>
