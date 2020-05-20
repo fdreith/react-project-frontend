@@ -2,12 +2,12 @@ export default (state = {
   myTasks: [], assignedTasks: [], completedTasks: []
 }, action) => {
 
-  const isMyTask = (taskOrTaskId) => {
-    if (taskOrTaskId.task) {
-      return taskOrTaskId.task.attributes.user.id === taskOrTaskId.task.attributes.owner.id
-    } else {
-      return state.myTasks.find(task => parseInt(task.id) === taskOrTaskId)
-    }
+  const isMyTask = (task) => {
+    return task.attributes.user.id === task.attributes.owner.id
+  }
+
+  const isInMyTaskState = taskId => {
+    return state.myTasks.find(task => parseInt(task.id) === taskId)
   }
 
   switch (action.type) {
@@ -23,22 +23,33 @@ export default (state = {
       return { myTasks, assignedTasks, completedTasks }
     case 'ADD_TASK':
       const newTask = convertDates(action.task)
-      if (isMyTask(action)) {
+      if (isMyTask(action.task)) {
         return { ...state, myTasks: [...state.myTasks, newTask] }
       } else {
         return { ...state, assignedTasks: [...state.assignedTasks, newTask] }
       }
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action.task)
-      if (isMyTask(action.task.attributes.id)) {
-        const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask))
-        return { ...state, myTasks }
+      if (isInMyTaskState(action.task.attributes.id)) {
+        if (isMyTask(action.task)) {
+          const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask))
+          return { ...state, myTasks }
+        } else {
+          const newMyTasks = state.myTasks.filter(task => parseInt(task.id) !== action.task.attributes.id)
+          return { ...state, myTasks: newMyTasks, assignedTasks: [...state.assignedTasks, convertedTask] }
+        }
       } else {
-        const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, convertedTask))
-        return { ...state, assignedTasks }
+        if (isMyTask(action.task)) {
+          const newAssignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.task.attributes.id)
+          return { ...state, myTasks: [...state.myTasks, convertedTask], assignedTasks: newAssignedTasks }
+        }
+        else {
+          const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, convertedTask))
+          return { ...state, assignedTasks }
+        }
       }
     case 'COMPLETED_TASK':
-      if (isMyTask(action.task.attributes.id)) {
+      if (isInMyTaskState(action.task.attributes.id)) {
         const myTasks = state.myTasks.filter(task => task.id !== action.task.id)
         const completedTasks = [...state.completedTasks, action.task]
         return { ...state, myTasks, completedTasks }
@@ -47,7 +58,7 @@ export default (state = {
         return { ...state, assignedTasks }
       }
     case 'DELETE_TASK':
-      if (isMyTask(action.taskId)) {
+      if (isInMyTaskState(action.taskId)) {
         const myTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
         return { ...state, myTasks }
       } else {

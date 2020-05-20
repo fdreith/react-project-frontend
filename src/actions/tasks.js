@@ -51,9 +51,8 @@ export const updateTask = (task, id, history) => {
           alert(response.content)
         } else {
           history.go(-1)
-          response.data.attributes.completed === true ?
-            dispatch(completedTask(response.data)) :
-            dispatch(updateTaskStore(response.data))
+          response.data.attributes.completed === true ? dispatch(completedTask(response.data))
+            : dispatch(updateTaskStore(response.data))
         }
         return response.data
       })
