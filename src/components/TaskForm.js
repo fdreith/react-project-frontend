@@ -70,7 +70,7 @@ class TaskForm extends Component {
             {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
           </Form.Control>
         </Form.Group>
-        <Button size="sm" variant="outline-secondary" type="submit">Submit</Button>
+        <Button size="sm" variant="outline-secondary" type="submit">Add Task</Button>
       </Form>
     )
   }

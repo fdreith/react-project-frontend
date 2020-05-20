@@ -75,7 +75,7 @@ class EditTask extends Component {
               {this.props.users.map(user => <option key={user.id} value={user.id}>{user.name}</option>)}
             </Form.Control>
           </Form.Group>
-          <Button size="sm" variant="outline-secondary" type="submit">Edit Task</Button>
+          <Button size="sm" variant="outline-secondary" type="submit">Update Task</Button>
         </Form>
         <br></br>
         {this.props.task && <Button size="sm" variant="outline-secondary" onClick={() => this.props.deleteTask(this.props.task.attributes.id, this.props.history)} type="button" value="Delete Task"> Delete Task </Button>}
