@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { login } from '../actions/currentUser'
-import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 

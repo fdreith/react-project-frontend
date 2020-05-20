@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { signUp } from '../actions/currentUser'
-import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
@@ -68,7 +66,7 @@ class SignUpForm extends Component {
           <input type="radio" name="supervisor" id="sup-false" value="false" defaultChecked={true} onChange={this.handleChange} />
           <label htmlFor="sup-false">No</label>
         </Form.Group>
-        <Button size="sm" variant="outline-secondary" type="submit">Login</Button>
+        <Button size="sm" variant="outline-secondary" type="submit">Sign Up</Button>
       </Form>
     )
   }
