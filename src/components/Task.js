@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
 import Button from 'react-bootstrap/Button'
+import { connect } from 'react-redux';
+import { updatePriority } from '../actions/tasks'
 
 class Task extends Component {
   state = {
     showComponent: false,
-    counter: 0
+    counter: 0,
+    task: this.props.task
   }
 
   handleClick = event => {
@@ -18,9 +21,8 @@ class Task extends Component {
     this.setState({
       counter: this.state.counter + 1
     })
+    this.props.updatePriority(this.state)
   }
-
-
 
   renderTask = () => {
     if (this.props.completed) {
@@ -72,4 +74,4 @@ const displayDate = (dateString) => {
 
 }
 
-export default Task
+export default connect(null, { updatePriority })(Task)
