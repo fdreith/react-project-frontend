@@ -7,7 +7,7 @@ import { updatePriority } from '../actions/tasks'
 class Task extends Component {
   state = {
     showComponent: false,
-    counter: 0,
+    counter: this.props.task.priority || 0,
     task: this.props.task
   }
 
@@ -28,7 +28,6 @@ class Task extends Component {
     if (this.props.completed) {
       return (
         <div>
-          <Button onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
           <li onClick={this.handleClick}>
             {this.props.task.attributes.content}
           </li>

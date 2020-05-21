@@ -66,7 +66,8 @@ export default (state = {
         return { ...state, assignedTasks }
       }
     case 'UPDATE_PRIORITY':
-      const prioritizedTask = updatePriority(action.task.task, action.task.counter)
+      const updatePriority = { priority: action.task.counter + 1 }
+      const prioritizedTask = { ...action.task.task, ...updatePriority }
       if (isInMyTaskState(action.task.task.attributes.id)) {
         const myTasks = state.myTasks.map(task => {
           return replaceIfEqual(task, prioritizedTask)
@@ -83,13 +84,8 @@ export default (state = {
   }
 }
 
-const updatePriority = (task, counter) => {
-  task.attributes.priority = counter + 1
-  return task
-}
-
 const replaceIfEqual = (task, actionTask) => {
-  if (task.id === actionTask.id) {
+  if (task.attributes.id === actionTask.attributes.id) {
     return actionTask
   } else {
     return task

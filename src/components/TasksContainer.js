@@ -49,15 +49,9 @@ class TasksContainer extends Component {
 
 const sortPriority = (tasks) => {
   return tasks.sort(function (a, b) {
-    const priorityA = a.attributes.priority
-    const priorityB = b.attributes.priority
-    if (priorityA > priorityB) {
-      return -1
-    }
-    if (priorityA < priorityB) {
-      return 1
-    }
-    return 0
+    const aPriority = a.priority ? a.priority : 0
+    const bPriority = b.priority ? b.priority : 0
+    return bPriority - aPriority
   })
 }
 
