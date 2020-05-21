@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button'
 class Task extends Component {
   state = {
     showComponent: false,
-    counter: 0
   }
 
   handleClick = event => {
@@ -14,19 +13,10 @@ class Task extends Component {
     })
   }
 
-  handleButtonClick = () => {
-    this.setState({
-      counter: this.state.counter + 1
-    })
-  }
-
-
-
   renderTask = () => {
     if (this.props.completed) {
       return (
         <div>
-          <Button onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
           <li onClick={this.handleClick}>
             {this.props.task.attributes.content}
           </li>
@@ -38,7 +28,6 @@ class Task extends Component {
     } else {
       return (
         <div>
-          <Button onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
           <li onClick={this.handleClick}>
             {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
           </li>
@@ -69,7 +58,6 @@ const displayDate = (dateString) => {
   const day = date.getDate()
   const year = date.getFullYear()
   return `${weekday}, ${month} ${day} ${year}`
-
 }
 
 export default Task

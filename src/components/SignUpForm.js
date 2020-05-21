@@ -34,7 +34,6 @@ class SignUpForm extends Component {
     this.props.signUp(this.state)
   }
 
-
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
