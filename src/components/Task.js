@@ -38,11 +38,17 @@ class Task extends Component {
       )
     } else {
       return (
-        <div>
-          <Button onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
-          <li onClick={this.handleClick}>
-            {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
-          </li>
+        <div className="row">
+          <div className="col-xs-4">
+
+            <Button size="sm" variant="outline-secondary" onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
+          </div>
+          <div className="col-xs-4">
+
+            <p className="li" onClick={this.handleClick}>
+              {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
+            </p>
+          </div>
           {this.state.showComponent &&
             <TaskInfo task={this.props.task} history={this.props.history} />
           }
