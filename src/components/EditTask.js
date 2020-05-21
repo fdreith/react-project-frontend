@@ -15,14 +15,11 @@ const initialState = {
 
 class EditTask extends Component {
 
-  state = this.props.task ?
-    {
-      content: this.props.task.attributes.content,
-      due_date: new Date(this.props.task.attributes.due_date),
-      user_id: this.props.task.attributes.user.id,
-      owner_id: parseInt(this.props.currentUser.id)
-    } :
-    initialState
+  state = {
+    content: this.props.task.attributes.content,
+    due_date: new Date(this.props.task.attributes.due_date),
+    user_id: this.props.task.attributes.user.id,
+  }
 
   handleChange = event => {
     if (event.target.name === "user_id") {
@@ -44,7 +41,9 @@ class EditTask extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.updateTask(this.state, this.props.task.attributes.id, this.props.history)
+    this.props.updateTask({
+      ...this.state, owner_id: parseInt(this.props.currentUser.id)
+    }, this.props.task.attributes.id, this.props.history)
     this.setState({
       initialState
     })

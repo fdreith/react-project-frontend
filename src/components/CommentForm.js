@@ -8,9 +8,7 @@ import Button from 'react-bootstrap/Button'
 class CommentForm extends Component {
 
   state = {
-    content: "",
-    task_id: this.props.taskId,
-    user_id: parseInt(this.props.currentUser.id)
+    content: ""
   }
 
   handleChange = event => {
@@ -21,11 +19,11 @@ class CommentForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.postComment(this.state)
+    this.props.postComment({
+      ...this.state, task_id: this.props.taskId, user_id: parseInt(this.props.currentUser.id)
+    })
     this.setState({
-      content: "",
-      task_id: this.props.taskId,
-      user_id: parseInt(this.props.currentUser.id)
+      content: ""
     })
   }
 

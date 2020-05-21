@@ -1,21 +1,32 @@
 import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
+import Button from 'react-bootstrap/Button'
 
 class Task extends Component {
   state = {
     showComponent: false,
+    counter: 0
   }
 
   handleClick = event => {
     this.setState({
-      showComponent: !this.state.showComponent
+      showComponent: !this.state.showComponent,
     })
   }
+
+  handleButtonClick = () => {
+    this.setState({
+      counter: this.state.counter + 1
+    })
+  }
+
+
 
   renderTask = () => {
     if (this.props.completed) {
       return (
         <div>
+          <Button onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
           <li onClick={this.handleClick}>
             {this.props.task.attributes.content}
           </li>
@@ -27,6 +38,7 @@ class Task extends Component {
     } else {
       return (
         <div>
+          <Button onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
           <li onClick={this.handleClick}>
             {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
           </li>

@@ -1,18 +1,40 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Task from './Task.js'
+import Button from 'react-bootstrap/Button'
 
 
-const MyTasks = props => {
+class MyTasks extends Component {
 
-  return (
-    <div className="myTasks">
-      <h6>{props.currentUser.attributes.name}'s Tasks:</h6>
-      <ul>
-        {props.myTasks && props.myTasks.map(task => <Task key={task.id} task={task} history={props.history} />)}
-      </ul>
-    </div>
-  )
+  state = {
+    counter: 0
+  }
+
+  handleClick = () => {
+    this.setState({
+      counter: this.state.counter + 1
+    })
+  }
+
+
+  render() {
+
+    return (
+      <div className="myTasks">
+        <h6>{this.props.currentUser.attributes.name}'s Tasks:</h6>
+        <ul>
+          {this.props.myTasks && this.props.myTasks.map(task => {
+            return (
+              <div key={task.id}>
+                <Task task={task} history={this.props.history} />
+               
+              </div>)
+          })}
+        </ul>
+      </div>
+    )
+  }
 }
+
 
 export default MyTasks
 
