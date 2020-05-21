@@ -99,3 +99,10 @@ export const deleteTaskStore = taskId => {
     taskId
   }
 }
+
+export const updatePriority = task => {
+  return {
+    type: "UPDATE_PRIORITY",
+    task
+  }
+}
