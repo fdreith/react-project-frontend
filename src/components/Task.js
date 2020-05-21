@@ -7,8 +7,7 @@ import { updatePriority } from '../actions/tasks'
 class Task extends Component {
   state = {
     showComponent: false,
-    counter: this.props.task.priority || 0,
-    task: this.props.task
+    counter: this.props.task.priority || 0
   }
 
   handleClick = event => {
@@ -21,7 +20,10 @@ class Task extends Component {
     this.setState({
       counter: this.state.counter + 1
     })
-    this.props.updatePriority(this.state)
+    this.props.updatePriority({
+      counter: this.state.counter,
+      task: this.props.task
+    })
   }
 
   renderTask = () => {
