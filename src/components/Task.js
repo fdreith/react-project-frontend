@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
 import Button from 'react-bootstrap/Button'
-import { connect } from 'react-redux';
-import { updatePriority } from '../actions/tasks'
 
 class Task extends Component {
   state = {
