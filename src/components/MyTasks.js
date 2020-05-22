@@ -31,7 +31,6 @@ class MyTasks extends Component {
   }
 
   render() {
-    console.log(this.state.myTasks)
     return (
       < div className="myTasks" >
         <h6>{this.props.currentUser.attributes.name}'s Tasks:</h6>
