@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
 import Button from 'react-bootstrap/Button'
-import { connect } from 'react-redux';
-import { updatePriority } from '../actions/tasks'
 
 class Task extends Component {
   state = {
     showComponent: false,
-    counter: this.props.task.priority || 0
+    counter: 0
   }
 
   handleClick = event => {
@@ -20,10 +18,13 @@ class Task extends Component {
     this.setState({
       counter: this.state.counter + 1
     })
-    this.props.updatePriority({
-      counter: this.state.counter,
-      task: this.props.task
-    })
+    this.updateTaskPriority(this.props.task, this.state.counter)
+  }
+
+  updateTaskPriority = (task, counter) => {
+    const updatePriority = { priority: counter + 1 }
+    const updatedTask = { ...task, ...updatePriority }
+    this.props.replaceTask(updatedTask)
   }
 
   renderTask = () => {
@@ -81,4 +82,4 @@ const displayDate = (dateString) => {
 
 }
 
-export default connect(null, { updatePriority })(Task)
+export default Task
