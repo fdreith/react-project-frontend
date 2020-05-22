@@ -14,22 +14,18 @@ class TasksContainer extends Component {
   }
 
   filterMyTasks = (tasks) => {
-    return tasks.filter(task => {
-      debugger
-      return task.type === "task"
-    })
+    return tasks.filter(task => task.attributes.user.id === parseInt(this.props.currentUser.id))
       .filter(task => task.attributes.completed === false)
   }
 
   filterAssignedTasks = (tasks) => {
-    return tasks.filter(task => task.type === "assigned_task")
-      .filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
+    return tasks.filter(task => task.attributes.user.id !== parseInt(this.props.currentUser.id))
       .filter(task => task.attributes.completed === false)
   }
 
   filterCompletedTasks = (tasks) => {
     return tasks.filter(task => task.attributes.completed === true)
-      .filter(task => task.type === "task")
+      .filter(task => task.attributes.user.id === parseInt(this.props.currentUser.id))
   }
 
   render() {
