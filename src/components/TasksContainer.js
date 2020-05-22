@@ -47,21 +47,24 @@ class TasksContainer extends Component {
   }
 }
 
-const sortPriority = (tasks) => {
-  return tasks.sort(function (a, b) {
-    const aPriority = a.priority ? a.priority : 0
-    const bPriority = b.priority ? b.priority : 0
-    return bPriority - aPriority
-  })
-}
+// const sortPriority = (tasks) => {
+//   return tasks.sort(function (a, b) {
+//     const aPriority = a.priority ? a.priority : 0
+//     const bPriority = b.priority ? b.priority : 0
+//     return bPriority - aPriority
+//   })
+// }
 
 const mapStateToProps = state => {
   return ({
     currentUser: state.currentUser,
     users: state.users,
-    myTasks: sortPriority(state.tasks.myTasks),
-    assignedTasks: sortPriority(state.tasks.assignedTasks),
-    completedTasks: sortPriority(state.tasks.completedTasks)
+    // myTasks: sortPriority(state.tasks.myTasks),
+    // assignedTasks: sortPriority(state.tasks.assignedTasks),
+    // completedTasks: sortPriority(state.tasks.completedTasks)
+    myTasks: state.tasks.myTasks,
+    assignedTasks: state.tasks.assignedTasks,
+    completedTasks: state.tasks.completedTasks
   })
 }
 

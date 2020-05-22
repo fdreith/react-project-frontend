@@ -67,20 +67,20 @@ export default (state = {
         const assignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
         return { ...state, assignedTasks }
       }
-    case 'UPDATE_PRIORITY':
-      const updatePriority = { priority: action.task.counter + 1 }
-      const prioritizedTask = { ...action.task.task, ...updatePriority }
-      if (isInMyTaskState(action.task.task.attributes.id)) {
-        const myTasks = state.myTasks.map(task => {
-          return replaceIfEqual(task, prioritizedTask)
-        })
-        return { ...state, myTasks }
-      } else {
-        const assignedTasks = state.assignedTasks.map(task => {
-          return replaceIfEqual(task, prioritizedTask)
-        })
-        return { ...state, assignedTasks }
-      }
+    // case 'UPDATE_PRIORITY':
+    //   const updatePriority = { priority: action.task.counter + 1 }
+    //   const prioritizedTask = { ...action.task.task, ...updatePriority }
+    //   if (isInMyTaskState(action.task.task.attributes.id)) {
+    //     const myTasks = state.myTasks.map(task => {
+    //       return replaceIfEqual(task, prioritizedTask)
+    //     })
+    //     return { ...state, myTasks }
+    //   } else {
+    //     const assignedTasks = state.assignedTasks.map(task => {
+    //       return replaceIfEqual(task, prioritizedTask)
+    //     })
+    //     return { ...state, assignedTasks }
+    //   }
     default:
       return state
   }
