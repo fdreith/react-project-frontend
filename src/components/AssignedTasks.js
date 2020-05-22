@@ -13,5 +13,10 @@ const AssignedTasks = props => {
   )
 }
 
+// const assignedTasks = sortByDate(tasks.filter(task => task.type === "assigned_task")
+//   .filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
+//   .filter(task => task.attributes.completed === false))
+
+
 export default AssignedTasks
 

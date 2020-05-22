@@ -19,4 +19,7 @@ const MyTasks = props => {
   )
 }
 
+// const myTasks = sortByDate(tasks.filter(task => task.type === "task")
+//   .filter(task => task.attributes.completed === false))
+
 export default MyTasks

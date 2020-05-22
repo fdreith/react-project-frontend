@@ -13,4 +13,8 @@ const CompletedTasks = props => {
   )
 }
 
+
+// const completedTasks = sortByDate(tasks.filter(task => task.attributes.completed === true)
+//   .filter(task => task.type === "task"))
+
 export default CompletedTasks
