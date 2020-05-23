@@ -35,7 +35,8 @@ export const addTask = task => {
   }
 }
 
-export const updateTask = (task, id, history) => {
+export const updateTask = (task, id, history, completed) => {
+  debugger
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${id}`, {
       method: "PATCH",
@@ -50,7 +51,7 @@ export const updateTask = (task, id, history) => {
         if (response.content) {
           alert(response.content)
         } else {
-          history.go(-1)
+          completed === "incomplete" && history.go(-1)
           dispatch(updateTaskStore(response.data))
         }
       })
