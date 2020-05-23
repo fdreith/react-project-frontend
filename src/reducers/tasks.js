@@ -16,7 +16,6 @@ export default (state = [], action) => {
       return newTasks
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action.task)
-      debugger
       const updatedTasks = sortByDate(state.map(task => {
         if (task.attributes.id === convertedTask.attributes.id) {
           return convertedTask
@@ -26,7 +25,7 @@ export default (state = [], action) => {
       }))
       return updatedTasks
     case 'DELETE_TASK':
-      const filteredTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
+      const filteredTasks = state.filter(task => parseInt(task.id) !== action.taskId)
       return filteredTasks
     default:
       return state
