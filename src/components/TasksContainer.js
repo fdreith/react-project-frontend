@@ -34,15 +34,15 @@ class TasksContainer extends Component {
         <Switch>
           <Route
             exact path="/tasks/my-tasks"
-            render={(routerProps) => <MyTasks {...routerProps} myTasks={this.filterMyTasks(this.props.tasks)} currentUser={this.props.currentUser} />}
+            render={(routerProps) => <MyTasks {...routerProps} myTasks={this.filterMyTasks(this.props.tasks)} key={this.filterMyTasks(this.props.tasks)} currentUser={this.props.currentUser} />}
           />
           <Route
             path="/tasks/assigned"
-            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.filterAssignedTasks(this.props.tasks)} />}
+            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.filterAssignedTasks(this.props.tasks)} key={this.filterAssignedTasks(this.props.tasks)} />}
           />
           <Route
             path="/tasks/completed"
-            render={(routerProps) => <CompletedTasks {...routerProps} completedTasks={this.filterCompletedTasks(this.props.tasks)} />}
+            render={(routerProps) => <CompletedTasks {...routerProps} completedTasks={this.filterCompletedTasks(this.props.tasks)} key={this.filterCompletedTasks(this.props.tasks)} />}
           />
           <Route
             path="/tasks/:id/edit"
