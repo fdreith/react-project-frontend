@@ -32,14 +32,6 @@ export default (state = [], action) => {
   }
 }
 
-// const replaceIfEqual = (task, actionTask) => {
-//   if (task.attributes.id === actionTask.attributes.id) {
-//     return actionTask
-//   } else {
-//     return task
-//   }
-// }
-
 const convertDates = (tasks) => {
   if (Array.isArray(tasks)) {
     return tasks.map(task => {
