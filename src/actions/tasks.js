@@ -51,25 +51,16 @@ export const updateTask = (task, id, history) => {
           alert(response.content)
         } else {
           history.go(-1)
-          response.data.attributes.completed === true ? dispatch(completedTask(response.data))
-            : dispatch(updateTaskStore(response.data))
+          dispatch(updateTaskStore(response.data))
         }
-        return response.data
       })
-      .catch(alert)
+    // .catch(alert)
   }
 }
 
 export const updateTaskStore = task => {
   return {
     type: "UPDATE_TASK",
-    task
-  }
-}
-
-export const completedTask = task => {
-  return {
-    type: "COMPLETED_TASK",
     task
   }
 }
@@ -97,12 +88,5 @@ export const deleteTaskStore = taskId => {
   return {
     type: "DELETE_TASK",
     taskId
-  }
-}
-
-export const updatePriority = task => {
-  return {
-    type: "UPDATE_PRIORITY",
-    task
   }
 }

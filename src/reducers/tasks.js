@@ -1,82 +1,34 @@
-export default (state = {
-  myTasks: [], assignedTasks: [], completedTasks: []
-}, action) => {
-
-  const isMyTask = (task) => {
-    return task.attributes.user.id === task.attributes.owner.id
-  }
-
-  const isInMyTaskState = taskId => {
-    return state.myTasks.find(task => parseInt(task.id) === taskId)
-  }
+export default (state = [], action) => {
 
   switch (action.type) {
     case 'SET_TASKS':
-      const tasks = convertDates(action.tasks)
-      const assignedTasks = sortByDate(tasks.filter(task => task.type === "assigned_task")
-        .filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
-        .filter(task => task.attributes.completed === false))
-      const myTasks = sortByDate(tasks.filter(task => task.type === "task")
-        .filter(task => task.attributes.completed === false))
-      const completedTasks = sortByDate(tasks.filter(task => task.attributes.completed === true)
-        .filter(task => task.type === "task"))
-      return { myTasks, assignedTasks, completedTasks }
+      const tasks = action.tasks.filter((task, index, self) =>
+        index === self.findIndex((t) => {
+          return t.attributes.id === task.attributes.id
+        })
+      )
+      const convertedTasks = convertDates(tasks)
+      const sortedTasks = sortByDate(convertedTasks)
+      return sortedTasks
     case 'ADD_TASK':
       const newTask = convertDates(action.task)
-      if (isMyTask(action.task)) {
-        const myTasks = sortByDate([...state.myTasks, newTask])
-        return { ...state, myTasks }
-      } else {
-        const assignedTasks = sortByDate([...state.assignedTasks, newTask])
-        return { ...state, assignedTasks }
-      }
+      const newTasks = sortByDate([...state, newTask])
+      return newTasks
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action.task)
-      if (isInMyTaskState(action.task.attributes.id)) {
-        if (isMyTask(action.task)) {
-          const myTasks = sortByDate(state.myTasks.map(task => replaceIfEqual(task, convertedTask)))
-          return { ...state, myTasks }
+      const updatedTasks = sortByDate(state.map(task => {
+        if (task.attributes.id === convertedTask.attributes.id) {
+          return convertedTask
         } else {
-          const newMyTasks = sortByDate(state.myTasks.filter(task => parseInt(task.id) !== action.task.attributes.id))
-          return { ...state, myTasks: newMyTasks, assignedTasks: [...state.assignedTasks, convertedTask] }
+          return task
         }
-      } else {
-        if (isMyTask(action.task)) {
-          const newAssignedTasks = sortByDate(state.assignedTasks.filter(task => parseInt(task.id) !== action.task.attributes.id))
-          return { ...state, myTasks: [...state.myTasks, convertedTask], assignedTasks: newAssignedTasks }
-        }
-        else {
-          const assignedTasks = sortByDate(state.assignedTasks.map(task => replaceIfEqual(task, convertedTask)))
-          return { ...state, assignedTasks }
-        }
-      }
-    case 'COMPLETED_TASK':
-      if (isInMyTaskState(action.task.attributes.id)) {
-        const myTasks = state.myTasks.filter(task => task.id !== action.task.id)
-        const completedTasks = [...state.completedTasks, action.task]
-        return { ...state, myTasks, completedTasks }
-      } else {
-        const assignedTasks = state.assignedTasks.filter(task => task.id !== action.task.id)
-        return { ...state, assignedTasks }
-      }
+      }))
+      return updatedTasks
     case 'DELETE_TASK':
-      if (isInMyTaskState(action.taskId)) {
-        const myTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, myTasks }
-      } else {
-        const assignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, assignedTasks }
-      }
+      const filteredTasks = state.filter(task => parseInt(task.id) !== action.taskId)
+      return filteredTasks
     default:
       return state
-  }
-}
-
-const replaceIfEqual = (task, actionTask) => {
-  if (task.attributes.id === actionTask.attributes.id) {
-    return actionTask
-  } else {
-    return task
   }
 }
 
