@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import TaskInfo from './TaskInfo'
-import Button from 'react-bootstrap/Button'
 
 class Task extends Component {
   state = {
