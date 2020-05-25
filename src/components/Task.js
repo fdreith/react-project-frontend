@@ -31,8 +31,11 @@ class Task extends Component {
           <div className="col-xs-4">
           </div>
           <div className="col-xs-4">
-            <p className={this.props.task.attributes.due_date > new Date() ? "text-default" : "text-danger"} onClick={this.handleClick}>
-              {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
+            <p
+              className={this.props.task.attributes.due_date > new Date() ? "text-default" : "text-danger"}
+              onClick={this.handleClick}>
+              {this.props.task.attributes.content} - by {todayOrTomorrow(this.props.task.attributes.due_date) || displayDate(this.props.task.attributes.due_date)
+              }
             </p>
           </div>
           {this.state.showComponent &&
@@ -52,6 +55,21 @@ class Task extends Component {
 
   }
 }
+
+const todayOrTomorrow = (date) => {
+  if (date.getFullYear() === new Date().getFullYear() &&
+    date.getMonth() === new Date().getMonth() &&
+    date.getDate() === new Date().getDate()) {
+    return "Today"
+  } else if (date.getFullYear() === new Date().getFullYear() &&
+    date.getMonth() === new Date().getMonth() &&
+    date.getDate() === (new Date().getDate() + 1)) {
+    return "Tomorrow"
+  } else {
+    return false
+  }
+}
+
 
 const displayDate = (dateString) => {
   const date = new Date(dateString)

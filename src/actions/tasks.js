@@ -36,7 +36,6 @@ export const addTask = task => {
 }
 
 export const updateTask = (task, id, history, completed) => {
-  debugger
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/tasks/${id}`, {
       method: "PATCH",
