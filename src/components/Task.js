@@ -31,12 +31,12 @@ class Task extends Component {
           <div className="col-xs-4">
           </div>
           <div className="col-xs-4">
-            <p
+            <li
               className={this.props.task.attributes.due_date > new Date() ? "text-default" : "text-danger"}
               onClick={this.handleClick}>
               {this.props.task.attributes.content} - by {todayOrTomorrow(this.props.task.attributes.due_date) || displayDate(this.props.task.attributes.due_date)
               }
-            </p>
+            </li>
           </div>
           {this.state.showComponent &&
             <TaskInfo task={this.props.task} history={this.props.history} />
