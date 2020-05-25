@@ -18,7 +18,7 @@ class TaskInfo extends Component {
   }
 
   handleClick = () => {
-    this.props.updateTask(this.state, this.props.task.attributes.id, this.props.history)
+    this.props.updateTask(this.state, this.props.task.attributes.id, this.props.history, "completed")
   }
 
   render() {

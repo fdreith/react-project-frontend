@@ -1,80 +1,34 @@
-export default (state = {
-  myTasks: [], assignedTasks: [], completedTasks: []
-}, action) => {
-
-  const isMyTask = (task) => {
-    return task.attributes.user.id === task.attributes.owner.id
-  }
-
-  const isInMyTaskState = taskId => {
-    return state.myTasks.find(task => parseInt(task.id) === taskId)
-  }
+export default (state = [], action) => {
 
   switch (action.type) {
     case 'SET_TASKS':
-      const tasks = convertDates(action.tasks)
-      const assignedTasks = tasks.filter(task => task.type === "assigned_task")
-        .filter(task => task.relationships.user.data.id !== task.relationships.owner.data.id)
-        .filter(task => task.attributes.completed === false)
-      const myTasks = tasks.filter(task => task.type === "task")
-        .filter(task => task.attributes.completed === false)
-      const completedTasks = tasks.filter(task => task.attributes.completed === true)
-        .filter(task => task.type === "task")
-      return { myTasks, assignedTasks, completedTasks }
+      const tasks = action.tasks.filter((task, index, self) =>
+        index === self.findIndex((t) => {
+          return t.attributes.id === task.attributes.id
+        })
+      )
+      const convertedTasks = convertDates(tasks)
+      const sortedTasks = sortByDate(convertedTasks)
+      return sortedTasks
     case 'ADD_TASK':
       const newTask = convertDates(action.task)
-      if (isMyTask(action.task)) {
-        return { ...state, myTasks: [...state.myTasks, newTask] }
-      } else {
-        return { ...state, assignedTasks: [...state.assignedTasks, newTask] }
-      }
+      const newTasks = sortByDate([...state, newTask])
+      return newTasks
     case 'UPDATE_TASK':
       const convertedTask = convertDates(action.task)
-      if (isInMyTaskState(action.task.attributes.id)) {
-        if (isMyTask(action.task)) {
-          const myTasks = state.myTasks.map(task => replaceIfEqual(task, convertedTask))
-          return { ...state, myTasks }
+      const updatedTasks = sortByDate(state.map(task => {
+        if (task.attributes.id === convertedTask.attributes.id) {
+          return convertedTask
         } else {
-          const newMyTasks = state.myTasks.filter(task => parseInt(task.id) !== action.task.attributes.id)
-          return { ...state, myTasks: newMyTasks, assignedTasks: [...state.assignedTasks, convertedTask] }
+          return task
         }
-      } else {
-        if (isMyTask(action.task)) {
-          const newAssignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.task.attributes.id)
-          return { ...state, myTasks: [...state.myTasks, convertedTask], assignedTasks: newAssignedTasks }
-        }
-        else {
-          const assignedTasks = state.assignedTasks.map(task => replaceIfEqual(task, convertedTask))
-          return { ...state, assignedTasks }
-        }
-      }
-    case 'COMPLETED_TASK':
-      if (isInMyTaskState(action.task.attributes.id)) {
-        const myTasks = state.myTasks.filter(task => task.id !== action.task.id)
-        const completedTasks = [...state.completedTasks, action.task]
-        return { ...state, myTasks, completedTasks }
-      } else {
-        const assignedTasks = state.assignedTasks.filter(task => task.id !== action.task.id)
-        return { ...state, assignedTasks }
-      }
+      }))
+      return updatedTasks
     case 'DELETE_TASK':
-      if (isInMyTaskState(action.taskId)) {
-        const myTasks = state.myTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, myTasks }
-      } else {
-        const assignedTasks = state.assignedTasks.filter(task => parseInt(task.id) !== action.taskId)
-        return { ...state, assignedTasks }
-      }
+      const filteredTasks = state.filter(task => parseInt(task.id) !== action.taskId)
+      return filteredTasks
     default:
       return state
-  }
-}
-
-const replaceIfEqual = (task, actionTask) => {
-  if (task.id === actionTask.id) {
-    return actionTask
-  } else {
-    return task
   }
 }
 
@@ -88,5 +42,18 @@ const convertDates = (tasks) => {
     tasks.attributes.due_date = new Date(tasks.attributes.due_date)
     return tasks
   }
+}
 
+const sortByDate = (tasks) => {
+  return tasks.sort(function (a, b) {
+    const dueDateA = a.attributes.due_date
+    const dueDateB = b.attributes.due_date
+    if (dueDateA < dueDateB) {
+      return -1
+    }
+    if (dueDateA > dueDateB) {
+      return 1
+    }
+    return 0
+  })
 }

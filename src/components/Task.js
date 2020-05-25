@@ -27,10 +27,14 @@ class Task extends Component {
       )
     } else {
       return (
-        <div>
-          <li onClick={this.handleClick}>
-            {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
-          </li>
+        <div className="row">
+          <div className="col-xs-4">
+          </div>
+          <div className="col-xs-4">
+            <p onClick={this.handleClick}>
+              {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
+            </p>
+          </div>
           {this.state.showComponent &&
             <TaskInfo task={this.props.task} history={this.props.history} />
           }

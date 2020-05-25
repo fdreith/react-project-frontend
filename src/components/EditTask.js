@@ -43,7 +43,7 @@ class EditTask extends Component {
     event.preventDefault()
     this.props.updateTask({
       ...this.state, owner_id: parseInt(this.props.currentUser.id)
-    }, this.props.task.attributes.id, this.props.history)
+    }, this.props.task.attributes.id, this.props.history, "incomplete")
     this.setState({
       initialState
     })

@@ -13,27 +13,43 @@ class TasksContainer extends Component {
     this.props.history.push('/tasks/my-tasks')
   }
 
+  filterMyTasks = (tasks) => {
+    return tasks.filter(task => task.attributes.user.id === parseInt(this.props.currentUser.id))
+      .filter(task => task.attributes.completed === false)
+  }
+
+  filterAssignedTasks = (tasks) => {
+    return tasks.filter(task => task.attributes.user.id !== parseInt(this.props.currentUser.id))
+      .filter(task => task.attributes.completed === false)
+  }
+
+  filterCompletedTasks = (tasks) => {
+    return tasks.filter(task => task.attributes.completed === true)
+      .filter(task => task.attributes.user.id === parseInt(this.props.currentUser.id))
+  }
+
   render() {
     return (
       <div className="tasks-container">
         <Switch>
           <Route
             exact path="/tasks/my-tasks"
-            render={(routerProps) => <MyTasks {...routerProps} myTasks={this.props.myTasks} currentUser={this.props.currentUser} />}
+            render={(routerProps) => <MyTasks {...routerProps} myTasks={this.filterMyTasks(this.props.tasks)} key={this.filterMyTasks(this.props.tasks)} currentUser={this.props.currentUser} />}
           />
           <Route
             path="/tasks/assigned"
-            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.props.assignedTasks} />}
+            render={(routerProps) => <AssignedTasks {...routerProps} assignedTasks={this.filterAssignedTasks(this.props.tasks)} key={this.filterAssignedTasks(this.props.tasks)} />}
           />
           <Route
             path="/tasks/completed"
-            render={(routerProps) => <CompletedTasks {...routerProps} completedTasks={this.props.completedTasks} />}
+            render={(routerProps) => <CompletedTasks {...routerProps} completedTasks={this.filterCompletedTasks(this.props.tasks)} key={this.filterCompletedTasks(this.props.tasks)} />}
           />
           <Route
             path="/tasks/:id/edit"
             render={(routerProps) => {
-              const tasks = [this.props.myTasks, this.props.assignedTasks].flat()
-              const task = tasks.find(task => task.attributes.id === parseInt(routerProps.match.params.id))
+              const task = this.props.tasks.find(task => {
+                return task.attributes.id === parseInt(routerProps.match.params.id)
+              })
               return <EditTask {...routerProps} task={task} />
             }}
           />
@@ -47,27 +63,12 @@ class TasksContainer extends Component {
   }
 }
 
-const sortByDate = (tasks) => {
-  return tasks.sort(function (a, b) {
-    const dueDateA = a.attributes.due_date
-    const dueDateB = b.attributes.due_date
-    if (dueDateA < dueDateB) {
-      return -1
-    }
-    if (dueDateA > dueDateB) {
-      return 1
-    }
-    return 0
-  })
-}
 
 const mapStateToProps = state => {
   return ({
     currentUser: state.currentUser,
     users: state.users,
-    myTasks: sortByDate(state.tasks.myTasks),
-    assignedTasks: sortByDate(state.tasks.assignedTasks),
-    completedTasks: sortByDate(state.tasks.completedTasks)
+    tasks: state.tasks
   })
 }
 
