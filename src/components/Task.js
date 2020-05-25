@@ -31,7 +31,7 @@ class Task extends Component {
           <div className="col-xs-4">
           </div>
           <div className="col-xs-4">
-            <p onClick={this.handleClick}>
+            <p className={this.props.task.attributes.due_date > new Date() ? "text-default" : "text-danger"} onClick={this.handleClick}>
               {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
             </p>
           </div>
