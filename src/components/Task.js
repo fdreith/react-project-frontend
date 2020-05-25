@@ -5,26 +5,12 @@ import Button from 'react-bootstrap/Button'
 class Task extends Component {
   state = {
     showComponent: false,
-    counter: 0
   }
 
   handleClick = event => {
     this.setState({
       showComponent: !this.state.showComponent,
     })
-  }
-
-  handleButtonClick = () => {
-    this.setState({
-      counter: this.state.counter + 1
-    })
-    this.updateTaskPriority(this.props.task, this.state.counter)
-  }
-
-  updateTaskPriority = (task, counter) => {
-    const updatePriority = { priority: counter + 1 }
-    const updatedTask = { ...task, ...updatePriority }
-    this.props.replaceTask(updatedTask)
   }
 
   renderTask = () => {
@@ -43,12 +29,9 @@ class Task extends Component {
       return (
         <div className="row">
           <div className="col-xs-4">
-
-            <Button size="sm" variant="outline-secondary" onClick={() => this.handleButtonClick()}>{this.state.counter}</Button>
           </div>
           <div className="col-xs-4">
-
-            <p className="li" onClick={this.handleClick}>
+            <p onClick={this.handleClick}>
               {this.props.task.attributes.content} - by {displayDate(this.props.task.attributes.due_date)}
             </p>
           </div>
