@@ -12,7 +12,8 @@ class Task extends Component {
     })
   }
 
-  renderTask = () => {
+
+  render() {
     if (this.props.completed) {
       return (
         <div>
@@ -26,32 +27,18 @@ class Task extends Component {
       )
     } else {
       return (
-        <div className="row">
-          <div className="col-xs-4">
-          </div>
-          <div className="col-xs-4">
-            <li
-              className={this.props.task.attributes.due_date > new Date() ? "text-default" : "text-danger"}
-              onClick={this.handleClick}>
-              {this.props.task.attributes.content} - by {todayOrTomorrow(this.props.task.attributes.due_date) || displayDate(this.props.task.attributes.due_date)
-              }
-            </li>
-          </div>
+        <>
+          <tr className={this.props.task.attributes.due_date > new Date() ? "text-default" : "text-danger"} onClick={this.handleClick}>
+            <td>{this.props.task.attributes.content}</td>
+            <td>{todayOrTomorrow(this.props.task.attributes.due_date) || displayDate(this.props.task.attributes.due_date)
+            }</td>
+          </tr>
           {this.state.showComponent &&
-            <TaskInfo task={this.props.task} history={this.props.history} />
-          }
-        </div>
+            <TaskInfo task={this.props.task} history={this.props.history} />}
+        </>
+
       )
     }
-  }
-
-  render() {
-    return (
-      <div>
-        {this.renderTask()}
-      </div>
-    )
-
   }
 }
 
