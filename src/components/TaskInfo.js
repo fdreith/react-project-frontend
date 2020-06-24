@@ -24,6 +24,7 @@ class TaskInfo extends Component {
   render() {
     return (
       <div>
+        <br />
         <Card>
           <Card.Body>
             {this.props.completed ||
