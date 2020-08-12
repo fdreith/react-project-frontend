@@ -46,11 +46,11 @@ class Task extends Component {
                   displayDate(this.props.task.attributes.due_date)}
               </li>
             </div>
-          <div className="col-xs-4">
-            {this.state.showComponent && (
+            <div className="col-xs-4">
+              {/* {this.state.showComponent && (
               <TaskInfo task={this.props.task} history={this.props.history} />
-            )}
-          </div>
+            )} */}
+            </div>
           </div>
         </>
       );
