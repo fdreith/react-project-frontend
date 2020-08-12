@@ -1,20 +1,21 @@
-import React from 'react'
-import Logout from './Logout.js'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import { LinkContainer } from 'react-router-bootstrap'
-import Button from 'react-bootstrap/Button'
+import React from "react";
+import Logout from "./Logout.js";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
+import Button from "react-bootstrap/Button";
 
-
-const NavBar = props => {
-
+const NavBar = (props) => {
   return (
     <div className="NavBar">
       <>
-        {props.loggedIn ?
-          <Navbar bg="light" >
-            <Navbar.Brand> Task Assign </Navbar.Brand>
-            <Nav >
+        {props.loggedIn ? (
+          <Navbar bg="light">
+            <Navbar.Brand>
+              {" "}
+              <h3>Task Assign</h3>{" "}
+            </Navbar.Brand>
+            <Nav>
               <LinkContainer to="/tasks/my-tasks">
                 <Button variant="light"> My Tasks </Button>
               </LinkContainer>
@@ -29,10 +30,10 @@ const NavBar = props => {
               <Logout history={props.history} />
             </Nav>
           </Navbar>
-          :
-          <Navbar className="bg-light justify-content-between" >
+        ) : (
+          <Navbar className="bg-light justify-content-between">
             <Navbar.Brand>Task Assign</Navbar.Brand>
-            <Nav >
+            <Nav>
               <LinkContainer to="/signup">
                 <Button variant="light"> Sign Up </Button>
               </LinkContainer>
@@ -41,10 +42,10 @@ const NavBar = props => {
               </LinkContainer>
             </Nav>
           </Navbar>
-        }
+        )}
       </>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default NavBar
+export default NavBar;
