@@ -16,13 +16,12 @@
   }
 } */
 
-.NavBar {
+/* .NavBar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
-}
-
+} */
 
 /* .App-header {
   background-color: #282c34;
