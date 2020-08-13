@@ -4,14 +4,16 @@ import TaskInfo from "./TaskInfo.js";
 
 class MyTasks extends Component {
   state = {
-    showComponent: true,
+    showComponent: false,
     task: "",
   };
 
-  toggleTaskInfo = () => {
-    debugger;
-    this.setStaet((state) => ({
+  showComponent = (event) => {
+    const taskId = event.target.attributes.id.nodeValue;
+    const task = this.props.myTasks.find((task) => task.id === taskId);
+    this.setState((state) => ({
       showComponent: !state.showComponent,
+      task: task,
     }));
   };
 
@@ -28,7 +30,7 @@ class MyTasks extends Component {
                     <Task
                       task={task}
                       history={this.props.history}
-                      toggleTaskInfo={this.toggleTaskInfo}
+                      showComponent={this.showComponent}
                     />
                   </div>
                 );
