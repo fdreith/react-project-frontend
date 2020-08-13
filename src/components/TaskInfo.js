@@ -9,10 +9,10 @@ import Button from "react-bootstrap/Button";
 
 class TaskInfo extends Component {
   state = {
-    content: this.props.task.attributes.content || null,
-    due_date: this.props.task.attributes.due_date || null,
-    user_id: this.props.task.attributes.user.id || null,
-    owner_id: this.props.task.attributes.owner.id || null,
+    content: this.props.task.attributes.content,
+    due_date: this.props.task.attributes.due_date,
+    user_id: this.props.task.attributes.user.id,
+    owner_id: this.props.task.attributes.owner.id,
     completed: true,
   };
 
