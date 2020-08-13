@@ -1,66 +1,36 @@
 import React, { Component } from "react";
-import TaskInfo from "./TaskInfo";
 
-class Task extends Component {
-  state = {
-    showComponent: false,
-  };
-
-  handleClick = (event) => {
-    this.setState({
-      showComponent: !this.state.showComponent,
-    });
-  };
-
-  renderTask = () => {
-    if (this.props.completed) {
+const Task = (props) => {
+  const renderTask = () => {
+    if (props.completed) {
       return (
         <div>
-          <li onClick={this.handleClick}>
-            {this.props.task.attributes.content}
-          </li>
-          {this.state.showComponent && (
-            <TaskInfo
-              task={this.props.task}
-              history={this.props.history}
-              completed={this.props.completed}
-            />
-          )}
+          <li onClick={props.showComponent}>{props.task.attributes.content}</li>
         </div>
       );
     } else {
       return (
-        <>
-          <div className="row">
-            <div className="col-xs-4">
-              <li
-                className={
-                  this.props.task.attributes.due_date > new Date()
-                    ? "text-default"
-                    : "text-danger"
-                }
-                onClick={this.handleClick}
-              >
-                {this.props.task.attributes.content} - by{" "}
-                {todayOrTomorrow(this.props.task.attributes.due_date) ||
-                  displayDate(this.props.task.attributes.due_date)}
-              </li>
-            </div>
-            <div className="col-xs-4">
-              {/* {this.state.showComponent && (
-              <TaskInfo task={this.props.task} history={this.props.history} />
-            )} */}
-            </div>
-          </div>
-        </>
+        <div>
+          <li
+            id={props.task.attributes.id}
+            className={
+              props.task.attributes.due_date > new Date()
+                ? "text-default"
+                : "text-danger"
+            }
+            onClick={props.showComponent}
+          >
+            {props.task.attributes.content} - by{" "}
+            {todayOrTomorrow(props.task.attributes.due_date) ||
+              displayDate(props.task.attributes.due_date)}
+          </li>
+        </div>
       );
     }
   };
 
-  render() {
-    return <div>{this.renderTask()}</div>;
-  }
-}
+  return <div>{renderTask()}</div>;
+};
 
 const todayOrTomorrow = (date) => {
   if (
