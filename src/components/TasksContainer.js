@@ -7,6 +7,7 @@ import CompletedTasks from "./CompletedTasks.js";
 import EditTask from "./EditTask.js";
 import { Switch, Route } from "react-router-dom";
 import TaskInfo from "./TaskInfo.js";
+import { Container, Row, Col } from "react-bootstrap";
 
 class TasksContainer extends Component {
   state = {
@@ -57,59 +58,73 @@ class TasksContainer extends Component {
   render() {
     return (
       <div className="tasks-container">
-        <Switch>
-          <Route
-            exact
-            path="/tasks/my-tasks"
-            render={(routerProps) => (
-              <MyTasks
-                {...routerProps}
-                myTasks={this.filterMyTasks(this.props.tasks)}
-                key={this.filterMyTasks(this.props.tasks)}
-                currentUser={this.props.currentUser}
-                showComponent={this.showComponent}
-              />
-            )}
-          />
-          <Route
-            path="/tasks/assigned"
-            render={(routerProps) => (
-              <AssignedTasks
-                {...routerProps}
-                assignedTasks={this.filterAssignedTasks(this.props.tasks)}
-                key={this.filterAssignedTasks(this.props.tasks)}
-                showComponent={this.showComponent}
-              />
-            )}
-          />
-          <Route
-            path="/tasks/completed"
-            render={(routerProps) => (
-              <CompletedTasks
-                {...routerProps}
-                completedTasks={this.filterCompletedTasks(this.props.tasks)}
-                key={this.filterCompletedTasks(this.props.tasks)}
-                showComponent={this.showComponent}
-              />
-            )}
-          />
-          <Route
-            path="/tasks/:id/edit"
-            render={(routerProps) => {
-              const task = this.props.tasks.find((task) => {
-                return (
-                  task.attributes.id === parseInt(routerProps.match.params.id)
-                );
-              });
-              return <EditTask {...routerProps} task={task} />;
-            }}
-          />
-        </Switch>
-        <div className="col s6">
-          {this.state.showComponent && (
-            <TaskInfo task={this.state.task} history={this.props.history} />
-          )}
-        </div>
+        <Container>
+          <Row>
+            <Col>
+              <Switch>
+                <Route
+                  exact
+                  path="/tasks/my-tasks"
+                  render={(routerProps) => (
+                    <MyTasks
+                      {...routerProps}
+                      myTasks={this.filterMyTasks(this.props.tasks)}
+                      key={this.filterMyTasks(this.props.tasks)}
+                      currentUser={this.props.currentUser}
+                      showComponent={this.showComponent}
+                    />
+                  )}
+                />
+                <Route
+                  path="/tasks/assigned"
+                  render={(routerProps) => (
+                    <AssignedTasks
+                      {...routerProps}
+                      assignedTasks={this.filterAssignedTasks(this.props.tasks)}
+                      key={this.filterAssignedTasks(this.props.tasks)}
+                      showComponent={this.showComponent}
+                    />
+                  )}
+                />
+                <Route
+                  path="/tasks/completed"
+                  render={(routerProps) => (
+                    <CompletedTasks
+                      {...routerProps}
+                      completedTasks={this.filterCompletedTasks(
+                        this.props.tasks
+                      )}
+                      key={this.filterCompletedTasks(this.props.tasks)}
+                      showComponent={this.showComponent}
+                    />
+                  )}
+                />
+                <Route
+                  path="/tasks/:id/edit"
+                  render={(routerProps) => {
+                    const task = this.props.tasks.find((task) => {
+                      return (
+                        task.attributes.id ===
+                        parseInt(routerProps.match.params.id)
+                      );
+                    });
+                    return <EditTask {...routerProps} task={task} />;
+                  }}
+                />
+              </Switch>
+            </Col>
+            <Col>
+              <div className="col s6">
+                {this.state.showComponent && (
+                  <TaskInfo
+                    task={this.state.task}
+                    history={this.props.history}
+                  />
+                )}
+              </div>
+            </Col>
+          </Row>
+        </Container>
         <hr />
         <TaskForm />
       </div>
