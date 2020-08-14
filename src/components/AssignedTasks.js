@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Task from "./Task.js";
 
 const AssignedTasks = (props) => {
