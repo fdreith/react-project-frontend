@@ -119,6 +119,7 @@ class TasksContainer extends Component {
                   <TaskInfo
                     task={this.state.task}
                     history={this.props.history}
+                    showComponent={this.showComponent}
                   />
                 )}
               </div>
