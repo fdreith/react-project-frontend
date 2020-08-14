@@ -5,7 +5,9 @@ const Task = (props) => {
     if (props.completed) {
       return (
         <div>
-          <li onClick={props.showComponent}>{props.task.attributes.content}</li>
+          <li id={props.task.attributes.id} onClick={props.showComponent}>
+            {props.task.attributes.content}
+          </li>
         </div>
       );
     } else {
