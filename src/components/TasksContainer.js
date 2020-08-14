@@ -15,6 +15,7 @@ class TasksContainer extends Component {
   };
 
   showComponent = (event) => {
+    debugger;
     const taskId = event.target.attributes.id.nodeValue;
     const task = this.props.tasks.find((task) => task.id === taskId);
     this.setState((state) => ({
