@@ -15,13 +15,23 @@ class TasksContainer extends Component {
     task: "",
   };
 
-  showComponent = (event) => {
-    const taskId = event.target.attributes.id.nodeValue;
-    const task = this.props.tasks.find((task) => task.id === taskId);
-    this.setState((state) => ({
-      showComponent: !state.showComponent,
+  showComponent = (task) => {
+    this.setState(() => ({
       task: task,
+      showComponent: !this.state.showComponent,
     }));
+  };
+
+  openComponent = (event) => {
+    this.setState({
+      showComponent: true,
+    });
+  };
+
+  closeComponent = (event) => {
+    this.setState({
+      showComponent: false,
+    });
   };
 
   componentDidMount() {
