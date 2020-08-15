@@ -5,7 +5,11 @@ const Task = (props) => {
     if (props.completed) {
       return (
         <div>
-          <li id={props.task.attributes.id} onClick={props.showComponent}>
+          <li
+            id={props.task.attributes.id}
+            onClick={(e) => props.showComponent(props.task, e)}
+          >
+            {console.log(props.task)}
             {props.task.attributes.content}
           </li>
         </div>
@@ -20,7 +24,7 @@ const Task = (props) => {
                 ? "text-default"
                 : "text-danger"
             }
-            onClick={props.showComponent}
+            onClick={() => props.showComponent(props.task)}
           >
             {props.task.attributes.content} - by{" "}
             {todayOrTomorrow(props.task.attributes.due_date) ||
