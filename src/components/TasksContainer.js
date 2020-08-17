@@ -14,7 +14,6 @@ class TasksContainer extends Component {
     renderTaskInfo: false,
     renderTaskEdit: false,
     task: "",
-    
   };
 
   renderTaskInfo = (task) => {
@@ -28,8 +27,8 @@ class TasksContainer extends Component {
     this.setState({
       renderTaskEdit: true,
       renderTaskInfo: false,
-    })
-  }
+    });
+  };
   componentDidMount() {
     this.props.history.push("/tasks/my-tasks");
   }
@@ -105,7 +104,7 @@ class TasksContainer extends Component {
                     />
                   )}
                 />
-                <Route
+                {/* <Route
                   path="/tasks/:id/edit"
                   render={(routerProps) => {
                     const task = this.props.tasks.find((task) => {
@@ -116,7 +115,7 @@ class TasksContainer extends Component {
                     });
                     return <EditTask {...routerProps} task={task} />;
                   }}
-                />
+                /> */}
               </Switch>
             </Col>
             <Col>
@@ -125,21 +124,16 @@ class TasksContainer extends Component {
                   <TaskInfo
                     task={this.state.task}
                     history={this.props.history}
+                    renderTaskEdit={this.renderTaskEdit}
+                  />
+                )}
+                {this.state.renderTaskInfo && (
+                  <EditTask
+                    task={this.state.task}
+                    history={this.props.history}
                     renderTaskInfo={this.renderTaskInfo}
                   />
                 )}
-                <Route
-                  path="/tasks/:id"
-                  render={(routerProps) => {
-                    const task = this.props.tasks.find((task) => {
-                      return (
-                        task.attributes.id ===
-                        parseInt(routerProps.match.params.id)
-                      );
-                    });
-                    return <TaskInfo {...routerProps} task={task} />;
-                  }}
-                />
               </div>
             </Col>
           </Row>
