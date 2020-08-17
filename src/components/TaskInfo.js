@@ -34,6 +34,7 @@ class TaskInfo extends Component {
           <Card.Body>
             {!this.props.completed && (
               <Link
+                onClick={this.props.showComponent}
                 to={`/tasks/${this.props.task.attributes.id}/edit`}
               >
                 <svg
