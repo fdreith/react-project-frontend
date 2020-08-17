@@ -11,29 +11,25 @@ import { Container, Row, Col } from "react-bootstrap";
 
 class TasksContainer extends Component {
   state = {
-    showComponent: false,
+    renderTaskInfo: false,
+    renderTaskEdit: false,
     task: "",
+    
   };
 
-  showComponent = (task) => {
-    this.setState(() => ({
+  renderTaskInfo = (task) => {
+    this.setState({
       task: task,
-      showComponent: !this.state.showComponent,
-    }));
-  };
-
-  openComponent = (event) => {
-    this.setState({
-      showComponent: true,
+      renderTaskInfo: !this.state.renderTaskInfo,
     });
   };
 
-  closeComponent = (event) => {
+  renderTaskEdit = () => {
     this.setState({
-      showComponent: false,
-    });
-  };
-
+      renderTaskEdit: true,
+      renderTaskInfo: false,
+    })
+  }
   componentDidMount() {
     this.props.history.push("/tasks/my-tasks");
   }
@@ -81,7 +77,7 @@ class TasksContainer extends Component {
                       myTasks={this.filterMyTasks(this.props.tasks)}
                       key={this.filterMyTasks(this.props.tasks)}
                       currentUser={this.props.currentUser}
-                      showComponent={this.showComponent}
+                      renderTaskInfo={this.renderTaskInfo}
                     />
                   )}
                 />
@@ -92,7 +88,7 @@ class TasksContainer extends Component {
                       {...routerProps}
                       assignedTasks={this.filterAssignedTasks(this.props.tasks)}
                       key={this.filterAssignedTasks(this.props.tasks)}
-                      showComponent={this.showComponent}
+                      renderTaskInfo={this.renderTaskInfo}
                     />
                   )}
                 />
@@ -105,7 +101,7 @@ class TasksContainer extends Component {
                         this.props.tasks
                       )}
                       key={this.filterCompletedTasks(this.props.tasks)}
-                      showComponent={this.showComponent}
+                      renderTaskInfo={this.renderTaskInfo}
                     />
                   )}
                 />
@@ -125,13 +121,25 @@ class TasksContainer extends Component {
             </Col>
             <Col>
               <div className="col s6">
-                {this.state.showComponent && (
+                {this.state.renderTaskInfo && (
                   <TaskInfo
                     task={this.state.task}
                     history={this.props.history}
-                    showComponent={this.showComponent}
+                    renderTaskInfo={this.renderTaskInfo}
                   />
                 )}
+                <Route
+                  path="/tasks/:id"
+                  render={(routerProps) => {
+                    const task = this.props.tasks.find((task) => {
+                      return (
+                        task.attributes.id ===
+                        parseInt(routerProps.match.params.id)
+                      );
+                    });
+                    return <TaskInfo {...routerProps} task={task} />;
+                  }}
+                />
               </div>
             </Col>
           </Row>
