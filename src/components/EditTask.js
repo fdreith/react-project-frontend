@@ -49,6 +49,7 @@ class EditTask extends Component {
     })
   }
 
+
   render() {
     return (
       <div className="task-edit">
