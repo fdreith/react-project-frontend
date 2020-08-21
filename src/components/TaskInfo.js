@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import Comment from "./Comment.js";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateTask } from "../actions/tasks";
 import CommentForm from "./CommentForm.js";
 import Button from "react-bootstrap/Button";
-import { Container, Row, Col } from "react-bootstrap";
 
 class TaskInfo extends Component {
   state = {
@@ -33,10 +31,6 @@ class TaskInfo extends Component {
         <Card>
           <Card.Body>
             {!this.props.completed && (
-              // <Link
-              //   onClick={this.props.renderTaskEdit}
-              //   to={`/tasks/${this.props.task.attributes.id}/edit`}
-              // >
               <svg
                 onClick={this.props.renderTaskEdit}
                 className="bi bi-pencil float-right"
@@ -57,7 +51,6 @@ class TaskInfo extends Component {
                   clipRule="evenodd"
                 />
               </svg>
-              // </Link>
             )}
 
             <h4>{this.props.task.attributes.content}</h4>
