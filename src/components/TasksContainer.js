@@ -8,11 +8,13 @@ import EditTask from "./EditTask.js";
 import { Switch, Route } from "react-router-dom";
 import TaskInfo from "./TaskInfo.js";
 import { Container, Row, Col } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 class TasksContainer extends Component {
   state = {
     renderTaskInfo: false,
     renderTaskEdit: false,
+    renderTaskForm: false,
     task: "",
   };
 
@@ -22,7 +24,6 @@ class TasksContainer extends Component {
         task: "",
         renderTaskInfo: false,
       });
-      console.log(this.state.renderTaskInfo, this.state.task);
     } else {
       this.setState({
         task: task,
@@ -40,6 +41,12 @@ class TasksContainer extends Component {
   componentDidMount() {
     this.props.history.push("/tasks/my-tasks");
   }
+
+  renderTaskForm = () => {
+    this.setState({
+      renderTaskForm: !this.state.renderTaskForm,
+    });
+  };
 
   filterMyTasks = (tasks) => {
     return tasks
@@ -135,7 +142,15 @@ class TasksContainer extends Component {
           </Row>
         </Container>
         <hr />
-        <TaskForm />
+        {this.state.renderTaskForm || (
+          <Button variant="outline-secondary" onClick={this.renderTaskForm}>
+            New Task
+          </Button>
+        )}
+        {this.state.renderTaskForm && (
+          <TaskForm renderTaskForm={this.renderTaskForm} />
+        )}
+        {console.log(this.state.renderTaskForm)}
       </div>
     );
   }
