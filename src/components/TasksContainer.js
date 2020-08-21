@@ -128,6 +128,7 @@ class TasksContainer extends Component {
                     task={this.state.task}
                     history={this.props.history}
                     renderTaskEdit={this.renderTaskEdit}
+                    renderTaskInfo={this.renderTaskInfo}
                   />
                 )}
                 {this.state.renderTaskEdit && (

@@ -22,6 +22,7 @@ class TaskInfo extends Component {
       this.props.history,
       "completed"
     );
+    this.props.renderTaskInfo(this.props.task);
   };
 
   render() {
