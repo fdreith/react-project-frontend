@@ -17,10 +17,18 @@ class TasksContainer extends Component {
   };
 
   renderTaskInfo = (task) => {
-    this.setState({
-      task: task,
-      renderTaskInfo: !this.state.renderTaskInfo,
-    });
+    if (task.id === this.state.task.id) {
+      this.setState({
+        task: "",
+        renderTaskInfo: false,
+      });
+      console.log(this.state.renderTaskInfo, this.state.task);
+    } else {
+      this.setState({
+        task: task,
+        renderTaskInfo: true,
+      });
+    }
   };
 
   renderTaskEdit = () => {
@@ -104,18 +112,6 @@ class TasksContainer extends Component {
                     />
                   )}
                 />
-                {/* <Route
-                  path="/tasks/:id/edit"
-                  render={(routerProps) => {
-                    const task = this.props.tasks.find((task) => {
-                      return (
-                        task.attributes.id ===
-                        parseInt(routerProps.match.params.id)
-                      );
-                    });
-                    return <EditTask {...routerProps} task={task} />;
-                  }}
-                /> */}
               </Switch>
             </Col>
             <Col>
