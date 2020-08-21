@@ -25,8 +25,8 @@ class TasksContainer extends Component {
 
   renderTaskEdit = () => {
     this.setState({
-      renderTaskEdit: true,
-      renderTaskInfo: false,
+      renderTaskEdit: !this.state.renderTaskEdit,
+      renderTaskInfo: !this.state.renderTaskInfo,
     });
   };
   componentDidMount() {
@@ -127,11 +127,11 @@ class TasksContainer extends Component {
                     renderTaskEdit={this.renderTaskEdit}
                   />
                 )}
-                {this.state.renderTaskInfo && (
+                {this.state.renderTaskEdit && (
                   <EditTask
                     task={this.state.task}
                     history={this.props.history}
-                    renderTaskInfo={this.renderTaskInfo}
+                    renderTaskEdit={this.renderTaskEdit}
                   />
                 )}
               </div>

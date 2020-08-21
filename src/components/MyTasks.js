@@ -12,7 +12,7 @@ const MyTasks = (props) => {
               <Task
                 task={task}
                 history={props.history}
-                showComponent={props.showComponent}
+                renderTaskInfo={props.renderTaskInfo}
               />
             </div>
           );
