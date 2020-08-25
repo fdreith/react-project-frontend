@@ -38,15 +38,16 @@ class TasksContainer extends Component {
       renderTaskInfo: !this.state.renderTaskInfo,
     });
   };
-  componentDidMount() {
-    this.props.history.push("/tasks/my-tasks");
-  }
 
   renderTaskForm = () => {
     this.setState({
       renderTaskForm: !this.state.renderTaskForm,
     });
   };
+
+  componentDidMount() {
+    this.props.history.push("/tasks/my-tasks");
+  }
 
   filterMyTasks = (tasks) => {
     return tasks
@@ -154,7 +155,6 @@ class TasksContainer extends Component {
         {this.state.renderTaskForm && (
           <TaskForm renderTaskForm={this.renderTaskForm} />
         )}
-        {console.log(this.state.renderTaskForm)}
       </div>
     );
   }

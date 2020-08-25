@@ -12,8 +12,7 @@ const NavBar = (props) => {
         {props.loggedIn ? (
           <Navbar bg="light">
             <Navbar.Brand>
-              {" "}
-              <h3>Task Assign</h3>{" "}
+              <h3>Task Assign</h3>
             </Navbar.Brand>
             <Nav>
               <LinkContainer to="/tasks/my-tasks">
