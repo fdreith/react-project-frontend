@@ -9,7 +9,6 @@ const Task = (props) => {
             id={props.task.attributes.id}
             onClick={(e) => props.renderTaskInfo(props.task, e)}
           >
-            {console.log(props.task)}
             {props.task.attributes.content}
           </li>
         </div>
