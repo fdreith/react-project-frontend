@@ -41,7 +41,7 @@ class CommentForm extends Component {
           />
         </Form.Group>
         <Button size="sm" variant="outline-secondary" type="submit">
-          <i class="fa fa-telegram"></i>
+          <i className="fa fa-telegram"></i>
         </Button>
       </Form>
     );
