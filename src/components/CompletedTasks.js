@@ -13,7 +13,7 @@ const CompletedTasks = (props) => {
               task={task}
               history={props.history}
               completed={"Misson Accomplished! This task has been completed."}
-              showComponent={props.showComponent}
+              renderTaskInfo={props.renderTaskInfo}
             />
           ))}
       </ul>

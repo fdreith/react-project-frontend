@@ -11,7 +11,7 @@ const AssignedTasks = (props) => {
             key={task.id}
             task={task}
             history={props.history}
-            showComponent={props.showComponent}
+            renderTaskInfo={props.renderTaskInfo}
           />
         ))}
       </ul>
