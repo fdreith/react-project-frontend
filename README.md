@@ -4,17 +4,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Task Assign
 
-Task Assign is a task management app that allows you to create tasks with due dates, and comments. You can assign tasks to other users and track the progress on those tasks. You can also view your completed tasks.
+Task Assign is a task management app that allows you to create tasks with due dates, and comments. You can assign tasks to other users and track the progress on those tasks. You can also view your completed tasks. Overdue tasks are indicated in red type.
 
 ![View Tasks](demo/view_tasks.gif)
 
 To create a task, click the 'New Task' button and fill out the task form. You do not need to select a user if the task is assigned to yourself
 
-![Create New Task](demo/new_tasks.gif)
+![Create New Task](demo/new_task.gif)
 
 Click on the task to view the details of a task, edit a task (by clicking on the pencil), comment on a task, or to mark as complete.
 
-![Edit Task](demo/edit_tasks.gif)
+![Edit Task](demo/edit_task.gif)
 
 ### Usage
 
