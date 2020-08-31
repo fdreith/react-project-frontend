@@ -31,7 +31,7 @@ class TaskInfo extends Component {
         <br />
         <Card>
           <Card.Body>
-            {!this.props.completed && (
+            {!this.props.task.attributes.completed && (
               <svg
                 onClick={this.props.renderTaskEdit}
                 className="bi bi-pencil float-right"
@@ -55,8 +55,8 @@ class TaskInfo extends Component {
             )}
 
             <h4>{this.props.task.attributes.content}</h4>
-
-            {this.props.completed || (
+            {console.log(this.props.completed)}
+            {this.props.task.attributes.completed || (
               <Button variant="outline-secondary" onClick={this.handleClick}>
                 <svg
                   className="bi bi-check"

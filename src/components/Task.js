@@ -2,7 +2,7 @@ import React from "react";
 
 const Task = (props) => {
   const renderTask = () => {
-    if (props.completed) {
+    if (props.task.attributes.completed) {
       return (
         <div>
           <li

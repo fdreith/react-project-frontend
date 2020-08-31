@@ -14,6 +14,7 @@ class TasksContainer extends Component {
   state = {
     renderTaskInfo: false,
     renderTaskEdit: false,
+    splitColumn: false,
     renderTaskForm: false,
     task: "",
   };
@@ -28,6 +29,7 @@ class TasksContainer extends Component {
       this.setState({
         task: task,
         renderTaskInfo: true,
+        splitColumn: true,
       });
     }
   };
@@ -36,6 +38,7 @@ class TasksContainer extends Component {
     this.setState({
       renderTaskEdit: !this.state.renderTaskEdit,
       renderTaskInfo: !this.state.renderTaskInfo,
+      splitColumn: !this.state.splitColumn,
     });
   };
 

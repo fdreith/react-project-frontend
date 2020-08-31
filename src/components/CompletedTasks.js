@@ -12,7 +12,7 @@ const CompletedTasks = (props) => {
               key={task.id}
               task={task}
               history={props.history}
-              completed={"Misson Accomplished! This task has been completed."}
+              // completed={"Misson Accomplished! This task has been completed."}
               renderTaskInfo={props.renderTaskInfo}
             />
           ))}
