@@ -55,7 +55,7 @@ class TaskInfo extends Component {
             )}
 
             <h4>{this.props.task.attributes.content}</h4>
-            {console.log(this.props.completed)}
+            <h6>Mission Accomplished! This task has been completed.</h6>
             {this.props.task.attributes.completed || (
               <Button variant="outline-secondary" onClick={this.handleClick}>
                 <svg
