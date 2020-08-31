@@ -1,101 +1,99 @@
-import { setTasks } from "./tasks.js"
+import { setTasks } from "./tasks.js";
 
-export const setCurrentUser = user => {
+export const setCurrentUser = (user) => {
   return {
     type: "SET_CURRENT_USER",
-    user
-  }
-}
+    user,
+  };
+};
 
 export const clearCurrentUser = () => {
   return {
-    type: "CLEAR_CURRENT_USER"
-  }
-}
+    type: "CLEAR_CURRENT_USER",
+  };
+};
 
 export const login = (credentials, history) => {
-  return dispatch => {
+  return (dispatch) => {
     return fetch("http://localhost:3001/api/v1/login", {
       credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify(credentials)
+      body: JSON.stringify(credentials),
     })
-      .then(resp => resp.json())
-      .then(response => {
+      .then((resp) => resp.json())
+      .then((response) => {
         if (response.error) {
-          alert(response.error)
+          alert(response.error);
         } else {
-          dispatch(setCurrentUser(response.data))
-          dispatch(setTasks(response.included))
-          history.push("/tasks/my-tasks")
+          dispatch(setCurrentUser(response.data));
+          dispatch(setTasks(response.included));
+          history.push("/tasks/my-tasks");
         }
       })
-      .catch(alert)
-  }
-}
+      .catch(alert);
+  };
+};
 
 export const signUp = (credentials, history) => {
-  return dispatch => {
+  return (dispatch) => {
     const userInfo = {
-      user: credentials
-    }
+      user: credentials,
+    };
     return fetch("http://localhost:3001/api/v1/signup", {
       credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json",
       },
-      body: JSON.stringify(userInfo)
+      body: JSON.stringify(userInfo),
     })
-      .then(r => r.json())
-      .then(response => {
+      .then((r) => r.json())
+      .then((response) => {
         if (response.error) {
-          alert(response.error)
+          alert(response.error);
         } else {
-          dispatch(setCurrentUser(response.data))
+          dispatch(setCurrentUser(response.data));
           // history.push('/')
         }
       })
-      .catch(alert)
-  }
-}
+      .catch(alert);
+  };
+};
 
-
-export const logout = event => {
-  return dispatch => {
-    dispatch(clearCurrentUser())
-    return fetch('http://localhost:3001/api/v1/logout', {
+export const logout = (event) => {
+  return (dispatch) => {
+    dispatch(clearCurrentUser());
+    return fetch("http://localhost:3001/api/v1/logout", {
       credentials: "include",
-      method: "DELETE"
-    })
-  }
-}
+      method: "DELETE",
+    });
+  };
+};
 
 export const getCurrentUser = () => {
-  return dispatch => {
+  return (dispatch) => {
     return fetch("http://localhost:3001/api/v1/get_current_user", {
       credentials: "include",
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     })
-      .then(resp => {
-        return resp.json()
+      .then((resp) => {
+        return resp.json();
       })
-      .then(response => {
+      .then((response) => {
         if (response.error) {
-          console.log(response.error)
+          alert(response.error);
         } else {
-          dispatch(setCurrentUser(response.data))
-          dispatch(setTasks(response.included))
+          dispatch(setCurrentUser(response.data));
+          dispatch(setTasks(response.included));
         }
-      })
-  }
-}
-
+      });
+  };
+};
