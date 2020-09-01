@@ -39,7 +39,6 @@ class TasksContainer extends Component {
     this.setState({
       renderTaskEdit: !this.state.renderTaskEdit,
       renderTaskInfo: !this.state.renderTaskInfo,
-      splitColumn: !this.state.splitColumn,
     });
   };
 
@@ -86,7 +85,6 @@ class TasksContainer extends Component {
         <Container>
           <Row>
             <Col xs={12} md={this.state.splitColumn ? 6 : 12}>
-              {console.log(this.state.splitColumn)}
               <Switch>
                 <Route
                   exact
