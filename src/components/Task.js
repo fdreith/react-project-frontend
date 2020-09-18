@@ -10,7 +10,7 @@ const Task = (props) => {
             id={props.task.attributes.id}
             onClick={(e) => props.renderTaskInfo(props.task, e)}
           >
-            <FontAwesomeIcon icon="coffee" />
+            <FontAwesomeIcon icon="circle" />
             {props.task.attributes.content}
           </li>
         </div>
