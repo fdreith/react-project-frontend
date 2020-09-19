@@ -1,24 +1,25 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Task = (props) => {
   const renderTask = () => {
     if (props.task.attributes.completed) {
       return (
         <div>
-          <li
+          <p
             id={props.task.attributes.id}
             onClick={(e) => props.renderTaskInfo(props.task, e)}
           >
-            <FontAwesomeIcon icon="circle" />
+            {/* <FontAwesomeIcon icon="circle" /> */}
+            <i class="fa fa-check-circle" aria-hidden="true"></i>{" "}
             {props.task.attributes.content}
-          </li>
+          </p>
         </div>
       );
     } else {
       return (
         <div>
-          <li
+          <p
             id={props.task.attributes.id}
             className={
               props.task.attributes.due_date > new Date()
@@ -27,10 +28,11 @@ const Task = (props) => {
             }
             onClick={() => props.renderTaskInfo(props.task)}
           >
+            <i class="fa fa-circle" aria-hidden="true"></i>
             {props.task.attributes.content} - by{" "}
             {todayOrTomorrow(props.task.attributes.due_date) ||
               displayDate(props.task.attributes.due_date)}
-          </li>
+          </p>
         </div>
       );
     }
