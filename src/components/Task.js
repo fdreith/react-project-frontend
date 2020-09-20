@@ -1,5 +1,6 @@
 import React from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ReactComponent as CircleIcon } from "../icons/circle-regular.svg";
 
 const Task = (props) => {
   const renderTask = () => {
@@ -28,7 +29,7 @@ const Task = (props) => {
             }
             onClick={() => props.renderTaskInfo(props.task)}
           >
-            <i class="fa fa-circle" aria-hidden="true"></i>
+            <i class="far fa-circle"></i> {/* <CircleIcon /> */}
             {props.task.attributes.content} - by{" "}
             {todayOrTomorrow(props.task.attributes.due_date) ||
               displayDate(props.task.attributes.due_date)}
