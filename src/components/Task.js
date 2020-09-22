@@ -1,40 +1,39 @@
 import React from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactComponent as CircleIcon } from "../icons/circle-regular.svg";
 
 const Task = (props) => {
   const renderTask = () => {
     if (props.task.attributes.completed) {
       return (
-        <div>
-          <p
+        <span>
+          <i className="fa fa-check-circle" aria-hidden="true"></i>{" "}
+          <span
             id={props.task.attributes.id}
             onClick={(e) => props.renderTaskInfo(props.task, e)}
           >
-            {/* <FontAwesomeIcon icon="circle" /> */}
-            <i class="fa fa-check-circle" aria-hidden="true"></i>{" "}
             {props.task.attributes.content}
-          </p>
-        </div>
+          </span>
+        </span>
       );
     } else {
       return (
-        <div>
-          <p
-            id={props.task.attributes.id}
-            className={
-              props.task.attributes.due_date > new Date()
-                ? "text-default"
-                : "text-danger"
-            }
-            onClick={() => props.renderTaskInfo(props.task)}
-          >
-            <i class="far fa-circle"></i> {/* <CircleIcon /> */}
-            {props.task.attributes.content} - by{" "}
-            {todayOrTomorrow(props.task.attributes.due_date) ||
-              displayDate(props.task.attributes.due_date)}
-          </p>
-        </div>
+        <>
+          <i className="far fa-circle"></i>{" "}
+          <span>
+            <span
+              id={props.task.attributes.id}
+              className={
+                props.task.attributes.due_date > new Date()
+                  ? "text-default"
+                  : "text-danger"
+              }
+              onClick={() => props.renderTaskInfo(props.task)}
+            >
+              {props.task.attributes.content} - by{" "}
+              {todayOrTomorrow(props.task.attributes.due_date) ||
+                displayDate(props.task.attributes.due_date)}
+            </span>
+          </span>
+        </>
       );
     }
   };
