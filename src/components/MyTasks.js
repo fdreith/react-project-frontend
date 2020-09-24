@@ -12,7 +12,8 @@ const MyTasks = (props) => {
               <Task
                 task={task}
                 history={props.history}
-                renderTaskInfo={props.renderTaskInfo}
+                toggleTaskInfo={props.toggleTaskInfo}
+                handleComplete={props.handleComplete}
               />
             </div>
           );

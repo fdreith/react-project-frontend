@@ -7,23 +7,29 @@ import CommentForm from "./CommentForm.js";
 import Button from "react-bootstrap/Button";
 
 class TaskInfo extends Component {
-  state = {
-    content: this.props.task.attributes.content,
-    due_date: this.props.task.attributes.due_date,
-    user_id: this.props.task.attributes.user.id,
-    owner_id: this.props.task.attributes.owner.id,
-    completed: true,
-  };
+  // state = {
+  //   content: this.props.task.attributes.content,
+  //   due_date: this.props.task.attributes.due_date,
+  //   user_id: this.props.task.attributes.user.id,
+  //   owner_id: this.props.task.attributes.owner.id,
+  //   completed: true,
+  // };
 
-  handleClick = () => {
-    this.props.updateTask(
-      this.state,
-      this.props.task.attributes.id,
-      this.props.history,
-      "completed"
-    );
-    this.props.renderTaskInfo(this.props.task);
-  };
+  // handleComplete = (task) => {
+  //   this.props.updateTask(
+  //     {
+  //       content: task.attributes.content,
+  //       due_date: task.attributes.due_date,
+  //       user_id: task.attributes.user.id,
+  //       owner_id: task.attributes.owner.id,
+  //       completed: true,
+  //     },
+  //     task.attributes.id,
+  //     this.props.history,
+  //     "completed"
+  //   );
+  //   this.props.toggleTaskInfo(task);
+  // };
 
   render() {
     return (
@@ -53,11 +59,18 @@ class TaskInfo extends Component {
                 />
               </svg>
             )}
-
             <h4>{this.props.task.attributes.content}</h4>
-            <h6>Mission Accomplished! This task has been completed.</h6>
+            {!this.props.task.attributes.completed || (
+              <h6>Mission Accomplished!</h6>
+            )}
             {this.props.task.attributes.completed || (
-              <Button variant="outline-secondary" onClick={this.handleClick}>
+              <Button
+                variant="outline-secondary"
+                onClick={
+                  (() => this.props.handleComplete(this.props.task),
+                  () => this.props.toggleTaskInfo(this.props.task))
+                }
+              >
                 <svg
                   className="bi bi-check"
                   width="1em"

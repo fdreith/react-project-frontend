@@ -9,27 +9,28 @@ import { Switch, Route } from "react-router-dom";
 import TaskInfo from "./TaskInfo.js";
 import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import { updateTask } from "../actions/tasks";
 
 class TasksContainer extends Component {
   state = {
-    renderTaskInfo: false,
+    toggleTaskInfo: false,
     renderTaskEdit: false,
-    splitColumn: false,
     renderTaskForm: false,
+    splitColumn: false,
     task: "",
   };
 
-  renderTaskInfo = (task) => {
+  toggleTaskInfo = (task) => {
     if (task.id === this.state.task.id) {
       this.setState({
         task: "",
-        renderTaskInfo: false,
+        toggleTaskInfo: false,
         splitColumn: !this.state.splitColumn,
       });
     } else {
       this.setState({
         task: task,
-        renderTaskInfo: true,
+        toggleTaskInfo: true,
         splitColumn: true,
       });
     }
@@ -38,7 +39,7 @@ class TasksContainer extends Component {
   renderTaskEdit = () => {
     this.setState({
       renderTaskEdit: !this.state.renderTaskEdit,
-      renderTaskInfo: !this.state.renderTaskInfo,
+      toggleTaskInfo: !this.state.toggleTaskInfo,
     });
   };
 
@@ -47,6 +48,21 @@ class TasksContainer extends Component {
       renderTaskForm: !this.state.renderTaskForm,
       splitColumn: true,
     });
+  };
+
+  handleComplete = (task) => {
+    this.props.updateTask(
+      {
+        content: task.attributes.content,
+        due_date: task.attributes.due_date,
+        user_id: task.attributes.user.id,
+        owner_id: task.attributes.owner.id,
+        completed: task.attributes.completed ? false : true,
+      },
+      task.attributes.id,
+      this.props.history,
+      task.attributes.completed || "completed"
+    );
   };
 
   componentDidMount() {
@@ -103,7 +119,8 @@ class TasksContainer extends Component {
                       myTasks={this.filterMyTasks(this.props.tasks)}
                       key={this.filterMyTasks(this.props.tasks)}
                       currentUser={this.props.currentUser}
-                      renderTaskInfo={this.renderTaskInfo}
+                      toggleTaskInfo={this.toggleTaskInfo}
+                      handleComplete={this.handleComplete}
                     />
                   )}
                 />
@@ -114,7 +131,8 @@ class TasksContainer extends Component {
                       {...routerProps}
                       assignedTasks={this.filterAssignedTasks(this.props.tasks)}
                       key={this.filterAssignedTasks(this.props.tasks)}
-                      renderTaskInfo={this.renderTaskInfo}
+                      toggleTaskInfo={this.toggleTaskInfo}
+                      handleComplete={this.handleComplete}
                     />
                   )}
                 />
@@ -127,7 +145,8 @@ class TasksContainer extends Component {
                         this.props.tasks
                       )}
                       key={this.filterCompletedTasks(this.props.tasks)}
-                      renderTaskInfo={this.renderTaskInfo}
+                      toggleTaskInfo={this.toggleTaskInfo}
+                      handleComplete={this.handleComplete}
                     />
                   )}
                 />
@@ -138,12 +157,13 @@ class TasksContainer extends Component {
                 {this.state.renderTaskForm && (
                   <TaskForm renderTaskForm={this.renderTaskForm} />
                 )}
-                {this.state.renderTaskInfo && (
+                {this.state.toggleTaskInfo && (
                   <TaskInfo
                     task={this.state.task}
                     history={this.props.history}
                     renderTaskEdit={this.renderTaskEdit}
-                    renderTaskInfo={this.renderTaskInfo}
+                    toggleTaskInfo={this.toggleTaskInfo}
+                    handleComplete={this.handleComplete}
                   />
                 )}
                 {this.state.renderTaskEdit && (
@@ -170,4 +190,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(TasksContainer);
+export default connect(mapStateToProps, { updateTask })(TasksContainer);

@@ -12,7 +12,8 @@ const CompletedTasks = (props) => {
               key={task.id}
               task={task}
               history={props.history}
-              renderTaskInfo={props.renderTaskInfo}
+              toggleTaskInfo={props.toggleTaskInfo}
+              handleComplete={props.handleComplete}
             />
           ))}
       </ul>
