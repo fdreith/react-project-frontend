@@ -7,29 +7,6 @@ import CommentForm from "./CommentForm.js";
 import Button from "react-bootstrap/Button";
 
 class TaskInfo extends Component {
-  // state = {
-  //   content: this.props.task.attributes.content,
-  //   due_date: this.props.task.attributes.due_date,
-  //   user_id: this.props.task.attributes.user.id,
-  //   owner_id: this.props.task.attributes.owner.id,
-  //   completed: true,
-  // };
-
-  // handleComplete = (task) => {
-  //   this.props.updateTask(
-  //     {
-  //       content: task.attributes.content,
-  //       due_date: task.attributes.due_date,
-  //       user_id: task.attributes.user.id,
-  //       owner_id: task.attributes.owner.id,
-  //       completed: true,
-  //     },
-  //     task.attributes.id,
-  //     this.props.history,
-  //     "completed"
-  //   );
-  //   this.props.toggleTaskInfo(task);
-  // };
 
   render() {
     return (
